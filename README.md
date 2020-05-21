@@ -12,14 +12,20 @@ Create project as subdirectory of: El directorio donde vayas a clonar el github 
 
 Create Project
 
+Lo primero hacer pull para clonar los ficheros en tu maquina con la ultima versión de cambios.
 
-Cuando vayas a subir los cambios en el 
+Tools > version Control > Pull
+
+Trabajas sobre el fichero
+
+Cuando vayas a subir los cambios al GIT
 
 boton GIT o en Tools > version Control > commit para comentar los cambios que has hecho en cada fichero
+
 boton Push para que suba el fichero a github
 
 username for https://github.com : practicaUOC
 
-Password:practicauoc2020
+Password: practicauoc2020
 
 
