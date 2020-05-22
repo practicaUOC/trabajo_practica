@@ -7,24 +7,34 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
-## R Markdown
+# Sección 1 (8 puntos) 
 
-He hecho un cambio aqui
+1. (0,5 puntos)  Buscad un conjunto de datos relacionados con la Bioestadística o Bioinformática. Para ello, podéis utilizar algunos recursos conocidos como es el caso de http://www.bioinformatics.org/sms2/index.html o de http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets.  
+También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+2. (0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,...), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y  mostrar los datos. 
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+3. (1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc... Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.
 
-```{r cars}
-summary(cars)
-```
+4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.
 
-## Including Plots
+5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. 
 
-You can also embed plots, for example:
+6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.
 
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
+7. (1 punto) A partir del conjunto de datos que estáis trabajando, plantead un estudio ANOVA y desarrollado si, a partir del estudio previo, se cumplen las condiciones.
 
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+8. (1 punto) A partir de los datos de origen y el estudio realizado, haced una valoración final. Para ello, podéis basaros en las siguientes preguntas: "disponemos de conclusiones finales?", "sería necesario hacer un análisis más avanzado?", "faltan datos para obtener otro tipo de información como...?",.... 
+
+
+# Sección 2 (2 puntos) 
+Como habréis comprobado, las aplicaciones y herramientas de R son muy amplias. En esta sección, tenéis que definir y desarrollar un ejemplo de aplicación de uno de los  temas que aparecen a continuación. 
+
+Podéis basaros en la información referenciada de la plataforma Datacamp, a la cual tenéis acceso con vuestro correo electrónico de la UOC, o cualquier otra fuente de información que consideréis más oportuna.
+
+Sería conveniente, que el ejemplo a desarrollar sea basado en la fuente de datos de la Sección 1, pero también podéis basaros en otro conjunto de datos.
+
+Los temas a escoger son:
+- Construcción de una aplicación web con Shiny 
+- Análisis cluster con R 
+- Repositorio Bioconductor en R 
