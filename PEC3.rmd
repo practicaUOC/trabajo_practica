@@ -14,6 +14,42 @@ También podéis utilizar otros recursos propios que conozcáis o que sean de vu
 
 2. (0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,...), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y  mostrar los datos. 
 
+Hemos utilizado un dataset que pertenece a la libreria de R ade4.  La manera de importar es con la función *data* del paquete base de R. En este caso no es necesario que utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.
+
+La particularidad de este dataset es que viene definido a través de un objeto *lista* llamado *piosphere*. 
+Este objeto lista está formado a su vez por cuatro objetos
+
+- Data frame que se llama *veg* que tiene la información de las especies vegetales. Cada una de las filas se corresponde a los datos de las piosferas elegidas. Tenemos 378 piosferas y 87 tipos de plantas.
+- Data frame que se llama *traits* que tiene la información de las características de las plantas. Cada una de las filas se corresponde a los valores de las columnas del data frame *veg*. Es decir en este data frame tendremos 87 filas y 21 características
+- Data frame que se llama *env* que contiene la información de variables medioambientales relativas a las 378 fincas que se han estudiado. Se han recopilado 25 variables
+- Vector llamado *habitat* que describe el número de habitats/año de cada una de las fincas analizadas.
+
+
+
+
+
+
+```{r carga_librerias}
+require(ade4)
+library(ade4)
+library(dplyr)
+library(ggplot2)
+library(kableExtra)
+```
+
+
+```{r}
+library(ade4)
+data("piosphere")
+help(piosphere)
+length(piosphere$traits)
+colnames(piosphere$traits)
+
+```
+
+
+
+
 3. (1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc... Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.
 
 4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.
