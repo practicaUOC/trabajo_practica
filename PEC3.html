@@ -382,7 +382,7 @@ summary {
 También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar. Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.</p></li>
 <li><p>(0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,…), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y mostrar los datos.</p></li>
 </ol>
-<p>Hemos utilizado un dataset que pertenece a la libreria de R ade4. La manera de importar es con la función <em>data</em> del paquete base de R. En este caso no es necesario que utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.</p>
+<p>Hemos utilizado un dataset que pertenece al paquete de R llamado ade4. La manera de importar es con la función <em>data</em> del paquete base de R. En este caso no es necesario que utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.</p>
 <p>La particularidad de este dataset es que viene definido a través de un objeto <em>lista</em> llamado <em>piosphere</em>. Este objeto lista está formado a su vez por cuatro objetos</p>
 <!-- La presión que ejercen los animales sobre los recursos, no se presenta -->
 <!-- uniformemente a lo largo del lote, esta ampliamente aceptado que la presión es -->
@@ -393,10 +393,10 @@ También podéis utilizar otros recursos propios que conozcáis o que sean de vu
 <!-- suelo y la vegetación, es muy intensa y esta presión disminuye con distancias -->
 <!-- crecientes a los puntos de bebida.  -->
 <ul>
-<li>Data frame que se llama <em>veg</em> que tiene la información sobre la proporción de cada cada una de las especies en la superficie superior de la vegetación. Cada una de las filas se corresponde a los datos de las piosferas elegidas. Tenemos 378 piosferas y 87 tipos de especies.</li>
-<li>Data frame que se llama <em>traits</em> que tiene la información de las características o rasgos de las plantas. Cada una de las filas se corresponde a los valores de las columnas del data frame <em>veg</em>. Es decir en este data frame tendremos 87 filas y 21 características</li>
-<li>Data frame que se llama <em>env</em> que contiene la información de variables medioambientales relativas a las 378 fincas que se han estudiado. Se han recopilado 25 variables</li>
-<li>Vector llamado <em>habitat</em> es una variable tipo factor que describe el tipo de habitat.</li>
+<li>Data frame que se llama <strong>veg</strong> que tiene la información sobre la proporción de cada cada una de las especies en la superficie superior de la vegetación. Cada una de las filas se corresponde a los datos de las piosferas elegidas. Tenemos 378 piosferas y 87 tipos de especies.</li>
+<li>Data frame que se llama <strong>traits</strong> que tiene la información de las características o rasgos de las plantas. Cada una de las filas se corresponde a los valores de las columnas del data frame <strong>veg</strong>. Es decir en este data frame tendremos 87 filas y 21 características</li>
+<li>Data frame que se llama <strong>env</strong> que contiene la información de variables medioambientales relativas a las 378 piosferas que se han estudiado. Se han recopilado 25 variables</li>
+<li>Vector llamado <strong>habitat</strong> es una variable tipo factor que describe el tipo de habitat de cada una de las piosferas.</li>
 </ul>
 <pre class="r"><code>require(ade4)
 library(ade4)
@@ -4635,7 +4635,7 @@ none
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-Tabla. 3: Clasificación de las variables que definen los rasgos de las especies
+Tabla. 4: Clasificación de las variables que definen los rasgos de las especies
 </caption>
 <thead>
 <tr>
@@ -4819,7 +4819,7 @@ factor
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-Tabla. 4: Primeras seis filas de Data Frame env
+Tabla. 5: Primeras seis filas de Data Frame env
 </caption>
 <thead>
 <tr>
@@ -5387,7 +5387,7 @@ DAW2-23
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-Tabla. 4: Clasificación de las variables que definen las variables medioambientales recogidas
+Tabla. 6: Clasificación de las variables que definen las variables medioambientales recogidas
 </caption>
 <thead>
 <tr>
@@ -5603,14 +5603,14 @@ numeric
 </table>
 <table class="table" style="margin-left: auto; margin-right: auto;">
 <caption>
-Tabla. 5: Primeros seis elementos de Vector habitat
+Tabla. 7: Primeros seis elementos de Vector habitat
 </caption>
 <thead>
 <tr>
 <th style="text-align:left;">
 </th>
 <th style="text-align:left;">
-x
+Tipo de Habitat
 </th>
 </tr>
 </thead>
@@ -5666,7 +5666,17 @@ stone
 </tbody>
 </table>
 <ol start="3" style="list-style-type: decimal">
-<li><p>(1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc… Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.</p></li>
+<li>(1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc… Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.</li>
+</ol>
+<ul>
+<li>Se me ocurre mostrar el porcentaje de especies que tienen datos en cada una de las piosferas</li>
+<li>Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera</li>
+<li>Mostrar la especie que tiene el valor maximo para cada una de las caracteristicas del data.frame traits</li>
+<li>Mostrar cuantas especies cuyo ciclo vital es anual tienen consistencia de hoja mesomorfica suave</li>
+<li>Mostrar que piosferas tienen mayor inclinacion de la media</li>
+<li>Mostrar que piosferas tienen valores nitritos, nitratos y phosphatos por encima del 75%</li>
+</ul>
+<ol start="4" style="list-style-type: decimal">
 <li><p>(1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.</p></li>
 <li><p>(1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros.</p></li>
 <li><p>(1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.</p></li>
