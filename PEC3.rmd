@@ -12,10 +12,13 @@ knitr::opts_chunk$set(echo = TRUE)
 **1. (0,5 puntos)  Buscad un conjunto de datos relacionados con la Bioestadística o Bioinformática. Para ello, podéis utilizar algunos recursos conocidos como es el caso de http://www.bioinformatics.org/sms2/index.html o de http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets.  **
 **También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.**
 
-Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos, que permitan la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.
-Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.  [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]. La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas.
-Nuestra atención se centra sobre el estudio elaborado por [], y los datos obtenidos a partir de este (que se pueden encontrar en []). Este estudio emplear un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente, el enfoque HOF (Huisman – Olff – Fresco), para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
+Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos, que permitan la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
 
+Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.   [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
+
+La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas.
+Nuestra atención se centra en el estudio elaborado por Wesuls, D. et al[1], y los datos obtenidos a partir de este (que se pueden encontrar en el repositorio "biosphere" en el paquete *ade4* de R). Este estudio emplear un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente, el enfoque HOF (Huisman – Olff – Fresco), para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
+1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*
 
 
 **2. (0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,...), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y  mostrar los datos.** 
@@ -120,13 +123,10 @@ ind.tabla <- increment(ind.tabla,1)
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
 
+Para los diferentes data.frames contenidos en la base de datos *piosphere*, vamos a realizar un estudio paramétrico, obtenieendo proporciones, tasas, razones y promedios para algunas de sus variables, así como representaciones gráficas que permitan una aproximación intuitiva a las particularidades de nuestra base de datos.
 
 
-#PROPORCIONES, TASAS, RAZONES Y PROMEDIOS.
-#resumen paramétrico de los datos: Procedimiento frecuencias, procedimiento descriptivos.
-#gráficas 
-
-Obtenemos los data frames
+Obtenemos tres data frames para cada una de las listas.
 ```{r}
 veg <- piosphere$veg
 traits <- piosphere$traits
@@ -137,8 +137,8 @@ env <- piosphere$env
 
 #Con respecto al df veg, previo al análisis paramétrico es necesario tratar los datos.
 #No se me ocurre una alternativa a agrupar las diferentes subáreas.
-#Esta es mi propuesta:
- 
+
+
 ```{r}
 split(veg,sub("-.*","",data$V1))
 
@@ -148,26 +148,26 @@ split(veg,sub("-.*","",data$V1))
 
 Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
 
-Proporciones y parámetros de centralidad y dispersión para diferentes variables (*height*, *leaf traits*, *diaspore length*, *life cycle*) nos van a proporcionar una visión intuitiva del conjunto de especies englobadas en nuestra base de datos, e incluso, sobre las características del bioma al que pertenecen. 
+Proporciones y parámetros de centralidad y dispersión para diferentes variables (*height*, *leaf traits*, *diaspore length*, *life cycle*) nos van a proporcionar información sobre el conjunto de especies englobadas en nuestro dataset, e incluso, sobre las características del bioma al que pertenecen. 
 
-#No he conseguido encontrar referencias al significado de las variables SLA y CDA
+(#No he conseguido encontrar referencias al significado de las variables SLA y CDA)
 
 Variable *height*
 ```{r cuatro_traits}
 #Proporciones
 attach(traits)
-range(height)
-quantile(height)
+range(traits$height)
+quantile(traits$height)
 
 
 #Medidas de centralidad y dispersión
-mean(height)
-median(height)
-sd(height)
+mean(traits$height)
+median(traits$height)
+sd(traits$height)
 
 
 #Histograma
-ggplot(data=traits, aes(x=traits$height)) + 
+ggplot(data=traits, aes(x=height)) + 
   geom_histogram(breaks=seq(0, 400, by=50), 
                  col="black", 
                  fill="steelblue", 
@@ -218,7 +218,42 @@ table(traits$life.cycle)/sum(table(traits$life.cycle))
 
 
 
+Variable Leaf Traits
+Photosynthetic traits were strongly coordinated, and specific leaf area predicted mass‐based rates of assimilation and respiration; leaf life span predicted many other leaf characteristics. Leaf traits were closely associated with growth, survival, and light requirement of the species.
+[https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/0012-9658%282006%2987%5B1733%3ALTAGPO%5D2.0.CO%3B2#:~:text=Photosynthetic%20traits%20were%20strongly%20coordinated,light%20requirement%20of%20the%20species.]
 
+
+The environment in which plants grow and the organisms that eat them can sculpt their features or ‘traits’ including the area, weight, and thickness of their leaves, the number of seeds they produce, the height they reach, and the amount and type of roots they grow (Diaz et al. 2015). These traits, in turn, can determine the effectiveness of each species – and the combination of species in a location – in capturing energy from the sun or nutrients from the soil.
+[https://natureecoevocommunity.nature.com/users/105785-jennifer-firn/posts/43150-leaf-traits-are-barometers-of-short-term-perturbations-in-grasslands-but-operating-instructions-apply]
+
+Ecologists use changes in leaf traits to compare plant growth strategies and subsequently infer how ecosystems function (Funk et al. 2017).
+
+
+```{r cuatro_traits}
+attach(traits)
+hist(traits$leaf.height)
+
+
+height <- traits[1]
+leaf.height <- 100*traits[4]
+
+
+traitHeights<- cbind(height, leaf.height)
+
+
+#Gráfico conjunto para la altura de la hoja y la altura total de la planta.
+ggplot(data=traitHeights, aes(height, leaf.height)) + 
+  geom_histogram(aes(x= heigth, y = ..density..), col="black", fill="steelblue", alpha = .6) + 
+  geom_histogram(aes(x=leaf.height, y = ..density..), col="black", fill="darkgreen", alpha = .6) + 
+  labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+
+```
+
+
+
+
+**Dataframe Env**
+Variable pH
 
 ```{r cuatro_env}
 
@@ -227,14 +262,13 @@ table(traits$life.cycle)/sum(table(traits$life.cycle))
 ```
 
 
+Variable nutrientes
 
 ```{r cuatro_env}
 
 
 
 ```
-
-
 
 **5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. **
 
@@ -243,10 +277,30 @@ table(traits$life.cycle)/sum(table(traits$life.cycle))
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
 
+```{r seis}
+
+
+
+```
+
+
+```{r seis}
+
+
+
+```
+
 
 **7. (1 punto) A partir del conjunto de datos que estáis trabajando, plantead un estudio ANOVA y desarrollado si, a partir del estudio previo, se cumplen las condiciones.**
 
+
+
 **8. (1 punto) A partir de los datos de origen y el estudio realizado, haced una valoración final. Para ello, podéis basaros en las siguientes preguntas: "disponemos de conclusiones finales?", "sería necesario hacer un análisis más avanzado?", "faltan datos para obtener otro tipo de información como...?",.... **
+
+
+
+
+
 
 
 # Sección 2 (2 puntos) 
