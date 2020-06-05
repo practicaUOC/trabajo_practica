@@ -117,6 +117,58 @@ ind.tabla <- increment(ind.tabla,1)
 
 5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. 
 
+
+Vamos a suponer que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(mean(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
+
+Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia inferior a 4 metros.
+
+Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia superior a 8 metros.
+
+
+```{r}
+library(fitdistrplus)
+descdist(piosphere$env$GrazInt, discrete = FALSE)
+hist(piosphere$env$GrazInt)
+  fit.weibull <- fitdist(piosphere$env$GrazInt, "weibull")
+
+
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+- Suponemos que tenemos que elegir 40 piosferas para hacer un subanalisis, de las cuales 8 tienen que ser calc, 16 sand07, 8 sand08, y 8 stone. Haremos una simulación de extracción y comprobaremos si alguna de las muestras elegidas cumple esos criterios.
+Haremos 
+
+```{r}
+set.seed(385)
+seleccion_muestras<-replicate(n = 1000,{muestra=sample(x = rownames(piosphere$veg),size = 40,replace = F)})
+
+seleccion_muestras<-data.frame(seleccion_muestras) %>% mutate_all(.funs = ~as.character(paste0(.)))
+
+seleccion_muestras[,sapply(seleccion_muestras,FUN=function(muestra){
+tabla_muestras<-table(piosphere$habitat[muestra])  
+all(tabla_muestras==c(8,16,8,8))  
+})]
+
+```
+
+
+
+
+
+
+
+
 6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.
 
 7. (1 punto) A partir del conjunto de datos que estáis trabajando, plantead un estudio ANOVA y desarrollado si, a partir del estudio previo, se cumplen las condiciones.
