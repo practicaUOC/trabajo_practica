@@ -118,7 +118,8 @@ ind.tabla <- increment(ind.tabla,1)
 - Mostrar que piosferas tienen valores nitritos, nitratos y phosphatos por encima del 75%
     - A colación de este, mostrar la distribución de pH, a que piosferas pertenecen la correlación con los nutrientes.
       (ej6)
-
+- Limitaciones de los índices de diversidad (simpson) en el contexto agronómico.
+[http://www.umass.edu/landeco/research/fragstats/documents/Metrics/Diversity%20Metrics/Limitations.htm] 
 
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
@@ -238,14 +239,22 @@ height <- traits[1]
 leaf.height <- 100*traits[4]
 
 
+
+ggplot(data=traits, aes(x=height)) + 
+  geom_density(fill="darkgreen", alpha = .4, binwidth=0.5)
+ggplot(data=traits, aes(x=leaf.height)) + 
+  geom_density(fill="steelblue", alpha = .4, binwidth=0.5)
+
+
 traitHeights<- cbind(height, leaf.height)
+pairs(traitHeights)
 
 
 #Gráfico conjunto para la altura de la hoja y la altura total de la planta.
-ggplot(data=traitHeights, aes(height, leaf.height)) + 
-  geom_histogram(aes(x= heigth, y = ..density..), col="black", fill="steelblue", alpha = .6) + 
-  geom_histogram(aes(x=leaf.height, y = ..density..), col="black", fill="darkgreen", alpha = .6) + 
-  labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+#ggplot(data=traitHeights, aes(height, leaf.height)) + 
+#  geom_histogram(aes(x= heigth, y = ..density..), col="black", fill="steelblue", alpha = .6) + 
+#  geom_histogram(aes(x=leaf.height, y = ..density..), col="black", fill="darkgreen", alpha = .6) + 
+#  labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
 
 ```
 
@@ -253,12 +262,28 @@ ggplot(data=traitHeights, aes(height, leaf.height)) +
 
 
 **Dataframe Env**
+Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
+
 Variable pH
 
 ```{r cuatro_env}
+#Proporciones
+range(env$pH)
+quantile(env$pH)
 
 
+#Medidas de centralidad y dispersión
+mean(env$pH)
+median(env$pH)
+sd(env$pH)
 
+
+#Histograma
+ggplot(data=env, aes(x=pH)) + 
+  geom_histogram(col="black", 
+                 fill="steelblue", 
+                 alpha = .6) + 
+  labs(title="Histograma para el pH", x="pH", y="Frecuencia")
 ```
 
 
@@ -266,9 +291,41 @@ Variable nutrientes
 
 ```{r cuatro_env}
 
+#Proporciones, NO2, NO3, PO4
+range(env$NO2)
+quantile(env$NO2)
+
+range(env$NO3)
+quantile(env$NO3)
+
+range(env$PO4)
+quantile(env$PO4)
+
+
+#Medidas de centralidad y dispersión  NO2, NO3, PO4
+mean(env$NO2)
+sd(env$NO2)
+
+mean(env$NO3)
+sd(env$NO3)
+
+mean(env$PO4)
+sd(env$PO4)
+```
+
+
+```{r}
+#Representaciones gráficas
 
 
 ```
+
+
+
+
+
+
+
 
 **5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. **
 
@@ -276,17 +333,58 @@ Variable nutrientes
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
+Previo a la realización de un análisis de regresión podemos un análisis visual y estadístico para observar que variables pueden presentar dicha correlación.  
 
-```{r seis}
+```{r seisph}
+#Creamos un df con nuestras variables de interés, para poder realizar un análisis gráfico
+nutrients <- cbind(env[4], env[15], env[17], env[18], env[19])
 
+pairs(nutrients)
+cor(nutrients)
 
+#No encontramos una correlación marcada para las diferentes características físico-químicas de la muestra. Sin embargo, si podemos observar una relación entre las variables height, spine length y seed length, del data frame de variables fisiológicas.
 
+cor(traits[1:9])
+
+reg <- cbind(traits[1], traits[7], traits[8])
+pairs(reg)
 ```
 
 
-```{r seis}
+
+Un modelo podría ser la producción de la especie, en general, y con subniveles (para cada una de las zonas), y diferentes características propias de la especie.
+
+```{r seistraits}
+#Obtenemos una nueva variable para las medias
+vegMeans <- as.data.frame(colMeans(veg[sapply(veg, is.numeric)])) 
+
+#Cambiamos el nombre de la columna
+names(vegMeans)[names(vegMeans) == "colMeans(veg[sapply(veg, is.numeric)])"] <- "meanSp"
+
+# Creamos un nuevo df con la variable "meanSp" y que incluya únicamente las variables cuantitativas, lo que nos permite calcular correlaciones
+traitsc <- cbind(traits[1:9], vegMeans)
+```
 
 
+
+```{r seistraits}
+cor(traitsc)
+pairs(traitsc)
+
+#Creamos el modelo
+
+linearMod <- lm( meanSp ~ height+ ACD+ leaf.area+ leaf.consistency+ leaf.ratio+ SLA+ spine.length+ seed.length+ diaspore.length, data=traitsc)
+
+summary(linearMod)
+```
+
+Como indicaban los valores de correlación, no parece haber una regresión pronunciada entre las características fisiológicas de las especies, y su presencia media. 
+
+Esto podría indicar una variedad en las condiciones ambientales para los diferentes territorios, que implicase la distorsión de posibles correlaciones para ambientes concretos. Podríamos realizar un análisis de regresión multinivel, para cada uno de los diferentes ambientes. O bien, que no exista esa correlación entre características fisiológicas y presencia.
+
+```{r seisveg}
+
+#Regresionmultinivel: veg ~ variables
 
 ```
 
