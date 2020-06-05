@@ -10,20 +10,24 @@ knitr::opts_chunk$set(echo = TRUE)
 # Sección 1 (8 puntos) 
 
 **1. (0,5 puntos)  Buscad un conjunto de datos relacionados con la Bioestadística o Bioinformática. Para ello, podéis utilizar algunos recursos conocidos como es el caso de http://www.bioinformatics.org/sms2/index.html o de http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets.  **
-**También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.**
+**También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.** 
 
-Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos, que permitan la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
+<div style="text-align: justify">
+Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo, viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
+
 
 Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.   [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
 
+
 La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas.
-Nuestra atención se centra en el estudio elaborado por Wesuls, D. et al[1], y los datos obtenidos a partir de este (que se pueden encontrar en el repositorio "biosphere" en el paquete *ade4* de R). Este estudio emplear un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente, el enfoque HOF (Huisman – Olff – Fresco), para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
-1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*
+Nuestra atención se centra en el estudio elaborado por Wesuls, D. et al [1], y los datos obtenidos a partir de este (que se pueden encontrar en el repositorio "biosphere" en el paquete *ade4* de R). Este estudio, emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
+1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*  
+<div/>  
 
 
 **2. (0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,...), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y  mostrar los datos.** 
 
-Hemos utilizado un dataset que pertenece al paquete de R llamado ade4.  La manera de importar es con la función *data* del paquete base de R. En este caso no es necesario que utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.
+Hemos utilizado un dataset que pertenece al paquete de R llamado ade4.  La manera de importar es con la función *data* del paquete base de R. En este caso no es necesario utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.
 
 La particularidad de este dataset es que viene definido a través de un objeto *lista* llamado *piosphere*. 
 Este objeto lista está formado a su vez por cuatro objetos
@@ -124,7 +128,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
 
-Para los diferentes data.frames contenidos en la base de datos *piosphere*, vamos a realizar un estudio paramétrico, obtenieendo proporciones, tasas, razones y promedios para algunas de sus variables, así como representaciones gráficas que permitan una aproximación intuitiva a las particularidades de nuestra base de datos.
+Para los diferentes data.frames contenidos en la base de datos *piosphere*, vamos a realizar un estudio paramétrico, obteniendo proporciones, tasas, razones y promedios para algunas de sus variables, así como representaciones gráficas que permitan una aproximación intuitiva a las particularidades de nuestra base de datos.
 
 
 Obtenemos tres data frames para cada una de las listas.
@@ -141,7 +145,7 @@ env <- piosphere$env
 
 
 ```{r}
-split(veg,sub("-.*","",data$V1))
+#split(veg,sub("-.*","",data$V1))
 
 ```
 
@@ -178,7 +182,7 @@ ggplot(data=traits, aes(x=height)) +
 
 
 Variable *diaspore length*
-```{r cuatro_traits, warning=FALSE}
+```{r, warning=FALSE}
 #Proporciones
 attach(traits)
 range(diaspore.length)
@@ -192,7 +196,7 @@ sd(diaspore.length)
 
 
 #Histograma en log
-ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
+logDhist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
   geom_histogram(col="black", 
                  fill="darkgreen", 
                  alpha = .6,
@@ -201,17 +205,21 @@ ggplot(data=traits, aes(x=log(traits$diaspore.length))) +
 
 
 #Boxplot en log
-ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
+logDboxplot <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
   geom_boxplot(col="black", 
                  fill="darkgreen", 
                  alpha = .6,
                  binwidth=5) + 
   labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+
+
+library(gridExtra)
+grid.arrange(logDhist, logDboxplot, ncol=2)
 ```
 
 
 
-```{r cuatro_traits}
+```{r}
 #Frecuencias
 table(traits$life.cycle)
 table(traits$life.cycle)/sum(table(traits$life.cycle))
@@ -230,7 +238,7 @@ The environment in which plants grow and the organisms that eat them can sculpt 
 Ecologists use changes in leaf traits to compare plant growth strategies and subsequently infer how ecosystems function (Funk et al. 2017).
 
 
-```{r cuatro_traits}
+```{r}
 attach(traits)
 hist(traits$leaf.height)
 
@@ -289,7 +297,7 @@ ggplot(data=env, aes(x=pH)) +
 
 Variable nutrientes
 
-```{r cuatro_env}
+```{r}
 
 #Proporciones, NO2, NO3, PO4
 range(env$NO2)
@@ -322,11 +330,6 @@ sd(env$PO4)
 
 
 
-
-
-
-
-
 **5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. **
 
 
@@ -335,7 +338,7 @@ sd(env$PO4)
 
 Previo a la realización de un análisis de regresión podemos un análisis visual y estadístico para observar que variables pueden presentar dicha correlación.  
 
-```{r seisph}
+```{r}
 #Creamos un df con nuestras variables de interés, para poder realizar un análisis gráfico
 nutrients <- cbind(env[4], env[15], env[17], env[18], env[19])
 
@@ -367,7 +370,7 @@ traitsc <- cbind(traits[1:9], vegMeans)
 
 
 
-```{r seistraits}
+```{r}
 cor(traitsc)
 pairs(traitsc)
 
