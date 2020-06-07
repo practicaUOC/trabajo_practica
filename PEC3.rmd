@@ -508,6 +508,7 @@ Graficamos la distribución de las intensidades de los pastoreos según el tipo 
 
 ```{r}
 df<-data.frame(GrazInt=piosphere$env$GrazInt,habitat=piosphere$habitat)
+df<-df[!df$habitat%in%"stone",]
 ```
 
 ```{r}
@@ -516,10 +517,14 @@ p <- ggplot(df, aes(x=habitat, y=GrazInt,fill=habitat)) +
 p
 ```
 
+Observamos que las intensidad en los bebederos de las piosferas que tienen habitat stone poseen una variabilidad mucho mayor que los otros tres habitats, ademas podemos ver como la mediana y la media difieren entre sí. Vemos en la siguiente tabla los valores de los descriptivos basicos media, mediana y desviación típica
+
 
 ```{r}
-df %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por color") %>% kableExtra::kable_styling()
+df %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
 ```
+
+Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
 
 ```{r}
 res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
@@ -529,16 +534,37 @@ res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %
 
 ```
 
+Al aplicar el test de homogeneidad de varianzas vemos que el p-valor obtenido en el test es inferior a 0,05 lo cual nos indica que no sigue las hipotesis necesarias para hacer el análisis de la varianza.
+
 ```{r}
 test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
 test.homog.varianzas$p.value
-
 ```
-```{r}
+
+```{r  eval=F}
 anova_df<-aov(GrazInt~habitat,data=df)
+summary(anova_df)
+plot(anova_df)
 resumen.anova<-summary(anova_df)
 resumen.anova[[1]]%>% data.frame() %>% kable() %>% kable_styling()
 ```
+
+En este punto podemos utilizar tres estrategías:
+
+- Hacer alguna transformación para conseguir las condiciones necesarias para aplicar la prueba ANOVA. Una de las estrategias
+
+- Comprobar si hay valores atípicos que al eliminarlos consigamos las condiciones para aplicar la prueba ANOVA.
+
+- Aplicar test no paramétricos (Prueba de Kruskal-Wallis)
+
+```{r}
+outlier_values <- boxplot.stats(piosphere$env$GrazInt)$out 
+outlier_index<- which(!piosphere$env$GrazInt%in%outlier_values)
+df<-df[outlier_index,]
+
+```
+
+
 
 
 ```{r}
@@ -550,27 +576,32 @@ Cox = data.frame(Box$x, Box$y)
 Cox2 = Cox[with(Cox, order(-Cox$Box.y)),] 
 lambda = Cox2[1, "Box.x"]      
 T_box = (piosphere$env$GrazInt ^ lambda - 1)/lambda 
+T_box = (piosphere$env$GrazInt ^ lamba) 
 plotNormalHistogram(T_box)
-shapiro.test(piosphere$env$GrazInt ^ lambda)
-
+```
 
 
 ```{r}
-
 df<-data.frame(GrazInt=T_box,habitat=piosphere$habitat)
 res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
 res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
-
 ```
+
+
+
+```{r}
+test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
+test.homog.varianzas$p.value
+```
+
+
 
 ```
 
 
 **8. (1 punto) A partir de los datos de origen y el estudio realizado, haced una valoración final. Para ello, podéis basaros en las siguientes preguntas: "disponemos de conclusiones finales?", "sería necesario hacer un análisis más avanzado?", "faltan datos para obtener otro tipo de información como...?",.... **
-
-
 
 
 
