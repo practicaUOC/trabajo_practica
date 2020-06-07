@@ -500,16 +500,48 @@ Esto podría indicar una variedad en las condiciones ambientales para los difere
 
 **7. (1 punto) A partir del conjunto de datos que estáis trabajando, plantead un estudio ANOVA y desarrollado si, a partir del estudio previo, se cumplen las condiciones.**
 
-Vamos a analizar si hay diferencias entre las siguientes características de las piosferas según el tipo de habitat en el que se encuentran.
+Vamos a analizar si hay diferencias entre la intensidad de los pastoreos dependiendo del tipo de habitat
 
 - GrazInt
 
-- logDist
-
-- pH
+Graficamos la distribución de las intensidades de los pastoreos según el tipo de habitat
 
 ```{r}
-sapply(colnames(piosphere$env),FUN=function(variable){shapiro.test(log(piosphere$env[,variable]))})
+df<-data.frame(GrazInt=piosphere$env$GrazInt,habitat=piosphere$habitat)
+```
+
+```{r}
+p <- ggplot(df, aes(x=habitat, y=GrazInt,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+
+```{r}
+df %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por color") %>% kableExtra::kable_styling()
+```
+
+```{r}
+res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+
+```
+
+```{r}
+test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
+test.homog.varianzas$p.value
+
+```
+```{r}
+anova_df<-aov(GrazInt~habitat,data=df)
+resumen.anova<-summary(anova_df)
+resumen.anova[[1]]%>% data.frame() %>% kable() %>% kable_styling()
+```
+
+
+```{r}
 library(MASS)
 Box <- boxcox(piosphere$env$GrazInt ~ 1,              # Transform Turbidity as a single vector
              lambda = seq(-6,6,0.1)      # Try values -6 to 6 by 0.1
@@ -520,6 +552,19 @@ lambda = Cox2[1, "Box.x"]
 T_box = (piosphere$env$GrazInt ^ lambda - 1)/lambda 
 plotNormalHistogram(T_box)
 shapiro.test(piosphere$env$GrazInt ^ lambda)
+
+
+
+```{r}
+
+df<-data.frame(GrazInt=T_box,habitat=piosphere$habitat)
+res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+
+```
+
 ```
 
 
