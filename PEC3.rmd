@@ -13,7 +13,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.** 
 
 <div style="text-align: justify">
-Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo, viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
+Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
 
 
 Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.   [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
@@ -133,10 +133,10 @@ ind.tabla <- increment(ind.tabla,1)
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
 
-Para los diferentes data.frames contenidos en la base de datos *piosphere*, vamos a realizar un estudio paramétrico, obteniendo proporciones, tasas, razones y promedios para algunas de sus variables, así como representaciones gráficas que permitan una aproximación intuitiva a las particularidades de nuestra base de datos.
+Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
 
 
-Obtenemos tres data frames para cada una de las listas.
+Obtenemos tres data frames para cada una de las listas para una mayor facilidad de trabajo.
 ```{r}
 veg <- piosphere$veg
 traits <- piosphere$traits
@@ -156,20 +156,19 @@ env <- piosphere$env
 
 Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
 
-Proporciones y parámetros de centralidad y dispersión para diferentes variables. 
 Las variables 
 
 - *height* 
-- *leaf traits*
+- *SLA* (leaf traits)
 - *diaspore length* 
 - *life cycle* 
+- *Growth Form*
 
 nos van a proporcionar información sobre el conjunto de especies englobadas en nuestro dataset, e incluso, sobre las características del bioma al que pertenecen. 
 
-(#No he conseguido encontrar referencias al significado de las variables SLA y CDA)
-Specific leaf area (quant) SLA Specific leaf area (mm² mg1), i.e. leaf area divided by dry weight of the leaf
+(Specific leaf area (quant) SLA Specific leaf area (mm² mg1), i.e. leaf area divided by dry weight of the leaf
 
-Above cover density (quant) ACD Percentage cover of the plant canopy above a vertically projected contour of the plant
+Above cover density (quant) ACD Percentage cover of the plant canopy above a vertically projected contour of the plant)
 
 Variable *height*
 
