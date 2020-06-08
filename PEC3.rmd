@@ -7,6 +7,10 @@ output: html_document
 knitr::opts_chunk$set(echo = TRUE)
 ```
 
+
+![image](URL)
+
+
 # Sección 1 (8 puntos) 
 
 **1. (0,5 puntos)  Buscad un conjunto de datos relacionados con la Bioestadística o Bioinformática. Para ello, podéis utilizar algunos recursos conocidos como es el caso de http://www.bioinformatics.org/sms2/index.html o de http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets.  **
@@ -132,11 +136,11 @@ ind.tabla <- increment(ind.tabla,1)
 
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
-
+<div style="text-align: justify">
 Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
+<div/>  
 
-
-Obtenemos tres data frames para cada una de las listas para una mayor facilidad de trabajo.
+Obtenemos tres data frames para cada una de las listas.
 ```{r}
 veg <- piosphere$veg
 traits <- piosphere$traits
@@ -175,7 +179,6 @@ Variable *height*
 
 ```{r cuatro_traits}
 #Medidas de distribución
-attach(traits)
 range(traits$height)
 quantile(traits$height)
 
@@ -194,6 +197,31 @@ ggplot(data=traits, aes(x=height)) +
                  alpha = .6) + 
   labs(title="Histograma para las alturas", x="Altura", y="Frecuencia")
 ```
+
+
+Variable SLA
+
+```{r}
+#Medidas de distribución
+range(traits$SLA)
+quantile(traits$SLA)
+
+
+#Medidas de centralidad y dispersión
+mean(traits$SLA)
+median(traits$SLA)
+sd(traits$SLA)
+
+
+#Histograma
+ggplot(data=traits, aes(x=SLA)) + 
+  geom_histogram(col="black", 
+                 fill="darkgreen", 
+                 alpha = .6) + 
+  labs(title="Histograma para SLA", x="SLA", y="Frecuencia")
+```
+
+
 
 
 Variable *diaspore length*
@@ -217,7 +245,7 @@ logDhist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) +
                  fill="darkgreen", 
                  alpha = .6,
                  binwidth=0.5) + 
-  labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+  labs(title="Longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
 
 
 #Boxplot en log
@@ -226,7 +254,7 @@ logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) +
                  fill="darkgreen", 
                  alpha = .6,
                  binwidth=5) + 
-  labs(title="Histograma para la longitud de las diásporas", y="Longitud", x="Diáspora")
+  labs(title="Longitud de las diásporas", y="Longitud", x="Diáspora")
 
 
 
@@ -235,63 +263,33 @@ grid.arrange(logDhist, logDboxplot, ncol=2)
 
 
 
+Variable **Lyfe Cycle**  
 ```{r}
 #Frecuencias y proporciones
 table(traits$life.cycle) %>% kable(col.names = c("Life Cycle","Freq")) %>% kable_styling()
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
 round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
-
 ```
 
 
 
-Variable Leaf Traits
-Photosynthetic traits were strongly coordinated, and specific leaf area predicted mass‐based rates of assimilation and respiration; leaf life span predicted many other leaf characteristics. Leaf traits were closely associated with growth, survival, and light requirement of the species.
-[https://esajournals.onlinelibrary.wiley.com/doi/abs/10.1890/0012-9658%282006%2987%5B1733%3ALTAGPO%5D2.0.CO%3B2#:~:text=Photosynthetic%20traits%20were%20strongly%20coordinated,light%20requirement%20of%20the%20species.]
 
-
-The environment in which plants grow and the organisms that eat them can sculpt their features or ‘traits’ including the area, weight, and thickness of their leaves, the number of seeds they produce, the height they reach, and the amount and type of roots they grow (Diaz et al. 2015). These traits, in turn, can determine the effectiveness of each species – and the combination of species in a location – in capturing energy from the sun or nutrients from the soil.
-[https://natureecoevocommunity.nature.com/users/105785-jennifer-firn/posts/43150-leaf-traits-are-barometers-of-short-term-perturbations-in-grasslands-but-operating-instructions-apply]
-
-Ecologists use changes in leaf traits to compare plant growth strategies and subsequently infer how ecosystems function (Funk et al. 2017).
-
-
+Variable **Growth Form**  
 ```{r}
-hist(traits$leaf.height)
-
-
-height <- traits[1]
-# height <- traits$height
-leaf.height <- 100*traits[4]
-# leaf.height <- 100*traits$leaf.height
-
-
-ggplot(data=traits, aes(x=height)) + 
-  geom_density(fill="darkgreen", alpha = .4, binwidth=0.5)
-ggplot(data=traits, aes(x=leaf.height)) + 
-  geom_density(fill="steelblue", alpha = .4, binwidth=0.5)
-
-
-traitHeights<- cbind(height, leaf.height)
-pairs(traitHeights)
-
-
-#Gráfico conjunto para la altura de la hoja y la altura total de la planta.
-#ggplot(data=traitHeights, aes(height, leaf.height)) + 
-#  geom_histogram(aes(x= heigth, y = ..density..), col="black", fill="steelblue", alpha = .6) + 
-#  geom_histogram(aes(x=leaf.height, y = ..density..), col="black", fill="darkgreen", alpha = .6) + 
-#  labs(title="Histograma para la longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
-
+table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq")) %>% kable_styling()
+# table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
+round(100*prop.table(table(traits$growth.form)),4) %>% kable(col.names = c("Growth Form","Proporción")) %>% kable_styling()
 ```
 
 
 
 
 **Dataframe Env**
-
+<div style="text-align: justify">
 Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
+<div/>  
 
-Variable pH
+Variable **pH**
 
 ```{r cuatro_env}
 #Medidas de distribución
@@ -314,7 +312,7 @@ ggplot(data=env, aes(x=pH)) +
 ```
 
 
-Variable nutrientes
+Variable **nutrients**
 
 ```{r}
 
@@ -341,10 +339,31 @@ sd(env$PO4)
 ```
 
 
+Representaciones gráficas
+
 ```{r}
 #Representaciones gráficas
+nut1 <- ggplot(data=env, aes(x=NO2)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración NO2", x="NO2", y="Frecuencia")
+  
+
+nut2 <- ggplot(data=env, aes(x=NO3)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración NO3", x="NO3", y="")
+
+nut3 <- ggplot(data=env, aes(x=PO4)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración PO4", x="PO4", y="")
 
 
+grid.arrange(nut1, nut2, nut3, ncol=3)
 ```
 
 
@@ -391,7 +410,7 @@ data.frame(lista.auc) %>% kable(col.names = "AUC") %>% kable_styling()
 
 ```
 
-Observamos que la carácteristica con mayor AUC es el ratio de la hoja
+Observamos que la carácteristica con mayor AUC es el ratio de la hoja.
 
 Los datos exactos para la prueba los vemos en la siguiente tabla. Podemos decir que si el ratio de la hoja es menor de 23,28 la probabilidad que nuestra posición de la flor sea  no expuesta es del 100% ya que la especificidad de nuestro test es de 1.
 
