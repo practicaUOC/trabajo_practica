@@ -10,14 +10,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-```{r}
-df %>% dplyr::group_by(habitat) %>% 
-  summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% 
-  kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
-```
-
-
-
 ## EJERCICIO 4
 <div style="text-align: justify">
 Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
@@ -331,3 +323,11 @@ apply(env,2,sd)
 
 
 #No tenemos evidencia como para elaborar los diferentes grupos.
+
+
+
+
+
+
+
+
