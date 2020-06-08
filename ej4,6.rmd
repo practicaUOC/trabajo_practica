@@ -1,0 +1,333 @@
+---
+title: "ej4,6"
+author: "Pablo Iriso"
+date: "8/6/2020"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+```{r}
+df %>% dplyr::group_by(habitat) %>% 
+  summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% 
+  kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
+```
+
+
+
+## EJERCICIO 4
+<div style="text-align: justify">
+Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
+<div/>  
+
+Obtenemos tres data frames para cada una de las listas.
+```{r}
+veg <- piosphere$veg
+traits <- piosphere$traits
+env <- piosphere$env
+```
+
+
+
+Formación de grupos para valores de vegetación **veg**
+
+```{r}
+DAW2 <- veg[grep("^DAW2",rownames(veg)),]
+DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
+
+DUW1 <- veg[grep("^DUW1",rownames(veg)),]
+DUW1 <- DUW1 %>% summarise_if(is.numeric, mean)
+
+KAW2 <- veg[grep("^KAW2",rownames(veg)),]
+KAW2 <- KAW2 %>% summarise_if(is.numeric, mean)
+
+KOW2 <- veg[grep("^KOW2",rownames(veg)),]
+KOW2 <- KOW2 %>% summarise_if(is.numeric, mean)
+
+KWW2 <- veg[grep("^KWW2",rownames(veg)),]
+KWW2 <- KWW2 %>% summarise_if(is.numeric, mean)
+
+MAW1 <- veg[grep("^MAW1",rownames(veg)),]
+MAW1 <- MAW1 %>% summarise_if(is.numeric, mean)
+
+MAW2 <- veg[grep("^MAW2",rownames(veg)),]
+MAW2 <- MAW2 %>% summarise_if(is.numeric, mean)
+
+MAW3 <- veg[grep("^MAW3",rownames(veg)),]
+MAW3 <- MAW3 %>% summarise_if(is.numeric, mean)
+
+NAW1 <- veg[grep("^NAW1",rownames(veg)),]
+NAW1 <- NAW1 %>% summarise_if(is.numeric, mean)
+
+NAW2 <- veg[grep("^NAW2",rownames(veg)),]
+NAW2 <- NAW2 %>% summarise_if(is.numeric, mean)
+
+TJW1 <- veg[grep("^TJW1",rownames(veg)),]
+TJW1 <- TJW1 %>% summarise_if(is.numeric, mean)
+
+TSK1 <- veg[grep("^TSK1",rownames(veg)),]
+TSK1 <- TSK1 %>% summarise_if(is.numeric, mean)
+
+TSW1 <- veg[grep("^TSW1",rownames(veg)),]
+TSW1 <- TSW1 %>% summarise_if(is.numeric, mean)
+
+TSW2 <- veg[grep("^TSW2",rownames(veg)),]
+TSW2 <- TSW2 %>% summarise_if(is.numeric, mean)
+
+
+veg.means <- rbind(DAW2, DUW1, KAW2, KOW2, KWW2, MAW1, MAW2, MAW3, MAW1, MAW2, TJW1, TSK1, TSW1, TSW2)
+```
+
+
+
+
+```{r}
+ggplot(data=veg.means, aes(x=Era_por)) + 
+  geom_histogram(col="black", 
+                 fill="steelblue", 
+                 alpha = .6) + 
+  labs(title="Aca_eri", x="Concentración", y="Frecuencia")
+```
+
+
+
+
+Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
+
+Las variables 
+
+- *height* 
+- *SLA* (leaf traits)
+- *diaspore length* 
+- *life cycle* 
+- *Growth Form*
+
+nos van a proporcionar información sobre el conjunto de especies englobadas en nuestro dataset, e incluso, sobre las características del bioma al que pertenecen. 
+
+(Specific leaf area (quant) SLA Specific leaf area (mm² mg1), i.e. leaf area divided by dry weight of the leaf
+
+Above cover density (quant) ACD Percentage cover of the plant canopy above a vertically projected contour of the plant)
+
+Variable *height*
+
+
+```{r cuatro_traits}
+
+#Medidas de distribución
+range(traits$height)
+quantile(traits$height)
+
+#traits %>%
+#  summarize(rango=range(height), cuantiles=quantile(height)) %>% 
+#  kableExtra::kable(caption="Rango y cuantiles para la altura") %>% kableExtra::kable_styling()
+
+#Medidas de centralidad y dispersión
+traits %>%
+  summarize(media=round(mean(height), 4), mediana=median(height), sd=round(sd(height),4)) %>% 
+  kableExtra::kable(caption="Media, Mediana y Desviación Típica para la altura") %>% kableExtra::kable_styling()
+
+#Histograma
+ggplot(data=traits, aes(x=height)) + 
+  geom_histogram(breaks=seq(0, 400, by=50), 
+                 col="black", 
+                 fill="steelblue", 
+                 alpha = .6) + 
+  labs(title="Histograma para las alturas", x="Altura", y="Frecuencia")
+```
+
+
+
+Variable **SLA**
+
+```{r}
+#Medidas de distribución
+range(traits$SLA)
+quantile(traits$SLA)
+
+
+#Medidas de centralidad y dispersión
+traits %>%
+  summarize(media=round(mean(SLA), 4), mediana=median(SLA), sd=round(sd(SLA),4)) %>% 
+  kableExtra::kable(caption="Media, Mediana y Desviación Típica para SLA") %>% kableExtra::kable_styling()
+
+
+#Histograma
+ggplot(data=traits, aes(x=SLA)) + 
+  geom_histogram(col="black", 
+                 fill="darkgreen", 
+                 alpha = .6) + 
+  labs(title="Histograma para SLA", x="SLA", y="Frecuencia")
+```
+
+
+
+Variable *diaspore length*
+
+```{r, warning=FALSE}
+#Medidas de distribución
+attach(traits)
+range(diaspore.length)
+quantile(diaspore.length)
+
+
+#Medidas de centralidad y dispersión
+traits %>%
+  summarize(media=round(mean(diaspore.length), 4), mediana=median(diaspore.length), sd=round(sd(diaspore.length),4)) %>% 
+  kableExtra::kable(caption="Media, Mediana y Desviación Típica para Diaspore length") %>% kableExtra::kable_styling()
+
+#Histograma en log
+logDhist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
+  geom_histogram(col="black", 
+                 fill="darkgreen", 
+                 alpha = .6,
+                 binwidth=0.5) + 
+  labs(title="Longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+
+
+#Boxplot en log
+logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) + 
+  geom_boxplot(col="black", 
+                 fill="darkgreen", 
+                 alpha = .6,
+                 binwidth=5) + 
+  labs(title="Longitud de las diásporas", y="Longitud", x="Diáspora")
+
+
+
+grid.arrange(logDhist, logDboxplot, ncol=2)
+```
+
+
+
+Variable **Lyfe Cycle**  
+```{r}
+#Frecuencias y proporciones
+table(traits$life.cycle) %>% kable(col.names = c("Life Cycle","Freq")) %>% kable_styling()
+# table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
+round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
+```
+
+
+
+
+Variable **Growth Form**  
+```{r}
+table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq")) %>% kable_styling()
+# table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
+round(100*prop.table(table(traits$growth.form)),4) %>% kable(col.names = c("Growth Form","Proporción")) %>% kable_styling()
+```
+
+
+
+
+**Dataframe Env**
+<div style="text-align: justify">
+Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
+<div/>  
+
+Variable **pH**
+
+```{r cuatro_env}
+#Medidas de distribución
+range(env$pH)
+quantile(env$pH)
+
+#Medidas de centralidad y dispersión
+env %>%
+  summarize(media=round(mean(pH), 4), mediana=median(pH), sd=round(sd(pH),4)) %>% 
+  kableExtra::kable(caption="Media, Mediana y Desviación Típica para el pH") %>% kableExtra::kable_styling()
+
+#Histograma
+ggplot(data=env, aes(x=pH)) + 
+  geom_histogram(col="black", 
+                 fill="steelblue", 
+                 alpha = .6) + 
+  labs(title="Histograma para el pH", x="pH", y="Frecuencia")
+```
+
+
+Variable **nutrients**
+
+```{r}
+
+#Medidas de Distribución, NO2, NO3, PO4
+range(env$NO2)
+quantile(env$NO2)
+
+range(env$NO3)
+quantile(env$NO3)
+
+range(env$PO4)
+quantile(env$PO4)
+
+
+#Medidas de centralidad y dispersión  NO2, NO3, PO4
+attach(env)
+m <- c(mean(NO2), mean(NO3), mean(PO4))
+sd <- c(sd(NO2), sd(NO3), sd(PO4))
+  
+df <- data.frame(m, sd)
+colnames(df) <- c("Media", "Desviación estándar")
+rownames(df) <- c("NO2", "NO3", "PO4")
+
+knitr::kable(df, align = "lccrr", format="html")
+
+```
+
+
+Representaciones gráficas
+
+```{r}
+#Representaciones gráficas
+nut1 <- ggplot(data=env, aes(x=NO2)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración NO2", x="NO2", y="Frecuencia")
+  
+
+nut2 <- ggplot(data=env, aes(x=NO3)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración NO3", x="NO3", y="")
+
+nut3 <- ggplot(data=env, aes(x=PO4)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Concentración PO4", x="PO4", y="")
+
+
+grid.arrange(nut1, nut2, nut3, ncol=3)
+```
+
+
+
+
+
+
+
+
+
+
+
+## EJERCICIO 6
+Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.
+
+
+```{r}
+
+DAW2 <- env[1:25,]
+
+
+apply(DAW2,2,sd)
+apply(env,2,sd)
+```
+
+
+
+#No tenemos evidencia como para elaborar los diferentes grupos.

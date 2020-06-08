@@ -464,14 +464,18 @@ muestras_elegidas %>% kable %>% kable_styling()
 
 
 ```{r}
-DAW2 <- veg[grep("^DAW2",rownames(veg)),]
+DAW2 <- env[grep("^DAW2",rownames(env)),]
 DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
 
+DAW2 <- env[c(1:25)]
+apply(DAW2,2,sd)
+apply(DAW2,2,mean)
 ```
 
 
 
-Previo a la realización de un análisis de regresión podemos un análisis visual y estadístico para observar que variables pueden presentar dicha correlación.  
+Previo a la realización de un análisis de regresión planteamos aquellas correlaciones que pueden proporcionar información  a nivel ecológico, posteriormente planteamos un análisis visual y estadístico para observar si dichas variables presentan una correlación.
+
 
 ```{r}
 #Creamos un df con nuestras variables de interés, para poder realizar un análisis gráfico
