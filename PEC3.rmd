@@ -8,7 +8,7 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-![image](URL)
+![image](https://github.com/practicaUOC/trabajo_practica/blob/master/portada.jpg?raw=true)
 
 
 # Sección 1 (8 puntos) 
@@ -119,6 +119,8 @@ ind.tabla <- increment(ind.tabla,1)
 
 - A colación de este, las diferencias porcentuales que puede haber entre las ST y las LT.
 
+- Podemos asumir que las variaciones internas para las diferentes subáreas son significativas?
+
 - Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera
 
 - Mostrar la especie que tiene el valor maximo para cada una de las caracteristicas del data.frame traits 
@@ -152,10 +154,19 @@ env <- piosphere$env
 #Con respecto al df veg, previo al análisis paramétrico es necesario tratar los datos.
 #No se me ocurre una alternativa a agrupar las diferentes subáreas.
 
+Vamos a crear un nuevo data frame con los valores medios por área.
+```{r}
+
+```
 
 ```{r}
-#split(veg,sub("-.*","",data$V1))
+ggplot(data=veg.means, aes(x=Era_por)) + 
+  geom_histogram(col="black", 
+                 fill="steelblue", 
+                 alpha = .6) + 
+  labs(title="Aca_eri", x="Concentración", y="Frecuencia")
 ```
+
 
 
 Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
@@ -451,6 +462,15 @@ muestras_elegidas %>% kable %>% kable_styling()
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
+
+```{r}
+DAW2 <- veg[grep("^DAW2",rownames(veg)),]
+DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
+
+```
+
+
+
 Previo a la realización de un análisis de regresión podemos un análisis visual y estadístico para observar que variables pueden presentar dicha correlación.  
 
 ```{r}
@@ -616,7 +636,7 @@ test.homog.varianzas$p.value
 
 
 
-```
+
 
 
 **8. (1 punto) A partir de los datos de origen y el estudio realizado, haced una valoración final. Para ello, podéis basaros en las siguientes preguntas: "disponemos de conclusiones finales?", "sería necesario hacer un análisis más avanzado?", "faltan datos para obtener otro tipo de información como...?",.... **
