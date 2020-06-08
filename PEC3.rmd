@@ -604,7 +604,6 @@ Graficamos la distribución de las intensidades de los pastoreos según el tipo 
 
 ```{r}
 df<-data.frame(GrazInt=piosphere$env$GrazInt,habitat=piosphere$habitat)
-df<-df[!df$habitat%in%"stone",]
 ```
 
 ```{r}
@@ -623,7 +622,7 @@ df %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),
 Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
 
 ```{r}
-  res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
 res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
@@ -653,14 +652,63 @@ En este punto podemos utilizar tres estrategías:
 
 - Aplicar test no paramétricos (Prueba de Kruskal-Wallis)
 
-```{r}
-outlier_values <- boxplot.stats(piosphere$env$GrazInt)$out 
-outlier_index<- which(!piosphere$env$GrazInt%in%outlier_values)
-df<-df[outlier_index,]
+Para utilizar la primera estrategía voy a probar
 
+- Transformar con logaritmos
+
+- Transformar con raices cuadradas
+
+- Transformaciones BoxCox, utilizadas tipicamente para corregir problemas de normalidad y heterocedasticidad.
+
+
+Tomando logaritmos:
+
+```{r}
+p <- df %>% mutate(log.Graz.Int=log(GrazInt)) %>% ggplot(aes(x=habitat, y=log.Graz.Int,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+Analizamos la normalidad de la variable transformada
+
+```{r}
+res.test.normalidad<-df %>% mutate(log.Graz.Int=log(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$log.Graz.Int)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+```
+
+```{r}
+df.log<-df %>% mutate(log.Graz.Int=log(GrazInt))
+test.homog.varianzas<-fligner.test(df.log$log.Graz.Int,df.log$habitat,df.log)
+test.homog.varianzas$p.value
 ```
 
 
+Analizamos la normalidad de la variable transformada con raices cuadradas
+
+```{r}
+p <- df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% ggplot(aes(x=habitat, y=sqrt.Graz.Int,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+
+```{r}
+res.test.normalidad<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$sqrt.Graz.Int)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+```
+
+```{r}
+df.sqrt<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt))
+test.homog.varianzas<-fligner.test(df.sqrt$sqrt.Graz.Int,df.sqrt$habitat,df.sqrt)
+test.homog.varianzas$p.value
+```
+
+
+Analizamos la normalidad de la variable transformada con la transformación de Box-Cox
 
 
 ```{r}
@@ -672,14 +720,12 @@ Cox = data.frame(Box$x, Box$y)
 Cox2 = Cox[with(Cox, order(-Cox$Box.y)),] 
 lambda = Cox2[1, "Box.x"]      
 T_box = (piosphere$env$GrazInt ^ lambda - 1)/lambda 
-T_box = (piosphere$env$GrazInt ^ lamba) 
-plotNormalHistogram(T_box)
 ```
 
 
 ```{r}
-df<-data.frame(GrazInt=T_box,habitat=piosphere$habitat)
-res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+df.boxcox<-data.frame(GrazInt_T_box=T_box,habitat=piosphere$habitat)
+res.test.normalidad<-df.boxcox %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt_T_box)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
 res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
@@ -688,10 +734,56 @@ res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %
 
 
 ```{r}
-test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
+test.homog.varianzas<-fligner.test(df.boxcox$GrazInt_T_box~df.boxcox$habitat,df.boxcox)
 test.homog.varianzas$p.value
 ```
 
+
+Detectaremos los datos atípicos de la muestra utilizando la función boxplot.stats
+
+
+```{r}
+outlier_values <- boxplot.stats(piosphere$env$GrazInt)$out 
+outlier_index<- which(!piosphere$env$GrazInt%in%outlier_values)
+df.sin.atipicos<-df[outlier_index,]
+```
+
+
+```{r}
+p <- ggplot(df.sin.atipicos, aes(x=habitat, y=GrazInt,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+```{r}
+df.sin.atipicos %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
+```
+
+Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
+
+```{r}
+res.test.normalidad<-df.sin.atipicos %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df.sin.atipicos$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+
+```
+
+Al aplicar el test de homogeneidad de varianzas vemos que el p-valor obtenido en el test es inferior a 0,05 lo cual nos indica que no sigue las hipotesis necesarias para hacer el análisis de la varianza.
+
+```{r}
+test.homog.varianzas<-fligner.test(df.sin.atipicos$GrazInt~df.sin.atipicos$habitat,df)
+test.homog.varianzas$p.value
+```
+
+
+Aplicar test no paramétricos:
+
+
+```{r}
+kruskal.test(df$GrazInt~df$habitat)
+compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T) %>% compareGroups::export2md()
+```
 
 
 
