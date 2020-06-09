@@ -303,31 +303,95 @@ grid.arrange(nut1, nut2, nut3, ncol=3)
 
 
 
-
-
-
-
 ## EJERCICIO 6
 Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.
 
 
+- Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera
+
+- Mostrar que piosferas tienen valores nitritos, nitratos y phosphatos por encima del 75%
+  
+- A colación de este, mostrar la distribución de pH, a que piosferas pertenecen la correlación con los nutrientes. (ej6)
+
+
+
+
+**6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
+
+
 ```{r}
+DAW2 <- env[grep("^DAW2",rownames(env)),]
+DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
 
-DAW2 <- env[1:25,]
-
-
+DAW2 <- env[c(1:25)]
 apply(DAW2,2,sd)
-apply(env,2,sd)
+apply(DAW2,2,mean)
 ```
 
 
 
-#No tenemos evidencia como para elaborar los diferentes grupos.
+Análisis de regresión para nutrientes y pH.
+
+```{r}
+#Creamos un df con nuestras variables de interés, para poder realizar un análisis gráfico
+nutrients <- cbind(env[4], env[15], env[17], env[18], env[19])
+
+pairs(nutrients)
+cor(nutrients)
+
+#No encontramos una correlación marcada para las diferentes características físico-químicas de la muestra. Sin embargo, si podemos observar una relación entre las variables height, spine length y seed length, del data frame de variables fisiológicas.
+
+cor(traits[1:9])
+
+reg <- cbind(traits[1], traits[7], traits[8])
+pairs(reg)
+
+model1 <- lm(height~seed.length + spine.length, data=traits)
+summary(model1)
+```
+
+
+
+Un modelo podría ser la producción de la especie, en general, y con subniveles (para cada una de las zonas), y diferentes características propias de la especie.
+
+```{r seistraits}
+#Obtenemos una nueva variable para las medias
+vegMeans <- as.data.frame(colMeans(veg[sapply(veg, is.numeric)])) 
+
+#Cambiamos el nombre de la columna
+names(vegMeans)[names(vegMeans) == "colMeans(veg[sapply(veg, is.numeric)])"] <- "meanSp"
+
+# Creamos un nuevo df con la variable "meanSp" y que incluya únicamente las variables cuantitativas, lo que nos permite calcular correlaciones
+traitsc <- cbind(traits[1:9], vegMeans)
+```
+
+
+
+```{r}
+cor(traitsc)
+pairs(traitsc)
+
+#Creamos el modelo
+
+linearMod <- lm( meanSp ~ height+ ACD+ leaf.area+ leaf.ratio+ SLA+ spine.length+ seed.length+ diaspore.length, data=traitsc)
+
+summary(linearMod)
+```
+
+Como indicaban los valores de correlación, no parece haber una regresión pronunciada entre las características fisiológicas de las especies, y su presencia media. 
 
 
 
 
 
 
+
+Esto podría indicar una variedad en las condiciones ambientales para los diferentes territorios, que implicase la distorsión de posibles correlaciones para ambientes concretos. Podríamos realizar un análisis de regresión multinivel, para cada uno de los diferentes ambientes. O bien, que no exista esa correlación entre características fisiológicas y presencia.
+
+```{r seisveg}
+
+#Regresionmultinivel: veg ~ variables
+
+```
 
 
