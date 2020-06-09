@@ -149,15 +149,9 @@ ind.tabla <- increment(ind.tabla,1)
 ```
 
 
-- A colación de este, las diferencias porcentuales que puede haber entre las ST y las LT.
-
-```{r}
-
-```
-
 - Podemos asumir que las variaciones internas para las diferentes subáreas son significativas?
 
-- Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera
+- Mostrar la especie mayoritaria en cada una de las especies
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
@@ -183,7 +177,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
+piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% dplyr::filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -211,6 +205,11 @@ ind.tabla <- increment(ind.tabla,1)
 
 
 - A colación de este, mostrar la distribución de pH, a que piosferas pertenecen la correlación con los nutrientes. (ej6)
+```{r}
+
+plot(piosphere$env[piosphere$env$PO4!=0,]$pH,piosphere$env[piosphere$env$PO4!=0,]$PO4)
+```
+
 
 - Limitaciones de los índices de diversidad (simpson) en el contexto agronómico.
 [http://www.umass.edu/landeco/research/fragstats/documents/Metrics/Diversity%20Metrics/Limitations.htm] 
@@ -264,6 +263,14 @@ nos van a proporcionar información sobre el conjunto de especies englobadas en 
 (Specific leaf area (quant) SLA Specific leaf area (mm² mg1), i.e. leaf area divided by dry weight of the leaf
 
 Above cover density (quant) ACD Percentage cover of the plant canopy above a vertically projected contour of the plant)
+
+
+Comprobamos la normalidad de las tres variables
+
+```{r}
+apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
+```
+
 
 Variable *height*
 
@@ -359,15 +366,10 @@ logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) +
   labs(title="Longitud de las diásporas", y="Longitud", x="Diáspora")
 
 
-
 grid.arrange(logDhist, logDboxplot, ncol=2)
 ```
 
-Comprobamos la normalidad de las tres variables
 
-```{r}
-apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
-```
 
 
 Describimos las variables categóricas **Lyfe Cycle**  y **Growth Form** 
