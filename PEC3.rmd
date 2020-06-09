@@ -17,7 +17,7 @@ knitr::opts_chunk$set(echo = TRUE)
 **También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.** 
 
 <div style="text-align: justify">
-Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados atendiendo a su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
+Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados según su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
 
 
 Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.   [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
@@ -27,6 +27,28 @@ La elaboración de modelos que permitan realizar una explotación óptima de la 
 Nuestra atención se centra en el estudio elaborado por Wesuls, D. et al [1], y los datos obtenidos a partir de este (que se pueden encontrar en el repositorio "biosphere" en el paquete *ade4* de R). Este estudio, emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
 1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*  
 <div/>  
+
+In order to study grazing-induced changes in plant species composition, vegetation structure, diversity patterns or soil parameters the piosphere approach has been frequently applied in studies in many semi-arid regions around the world (Perkins & Thomas 1993; Landsberg et al. 2003; Todd 2006; Sasaki et al. 2008).
+
+In the present study, we investigated the influence of
+livestock grazing on the distribution of plant traits in a
+semi-arid African savanna ecosystem. 
+
+
+Our study area comprises ten farms in central Namibia,
+southern Africa (Fig. 1) near the town of Rehoboth (23.3°
+S, 17.1°E). It is located in the Namibian Central Highland
+foothills (ca. 1400 m a.s.l.) with a relatively flat topography and scattered mountainous terrain. The climate is
+semi-arid, with an average annual rainfall ranging from
+200 to 300 mm, typically occurring during the summer
+months of Dec to Mar. The rainfall is highly variable spatially and temporally, with a coefficient of variation of up
+to 40% (Mendelsohn et al. 2002). The average daily temperatures range from 17 °C in the winter months to 25 °C
+in summer. Soils vary from sandy to loamy. Dominant soil
+types are deep arenosols, shallow leptosols, calcisols and
+regosols. The study sites belong to the Nama-Karoo biome
+of southern Africa (Rutherford & Westfall 1994).
+[Wesus et al]
+
 
 
 **2. (0,5 puntos) Utilizando R, mostrad y explicad qué tipo de fichero habéis importado y las variables que forman parte de él (tipo, clasificación,...), así como todo aquello que creáis relevante. Incluir capturas de pantalla y las instrucciones en R que habéis utilizado para importar y  mostrar los datos.** 

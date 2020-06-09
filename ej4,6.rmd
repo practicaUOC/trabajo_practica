@@ -318,6 +318,16 @@ Realizad un breve análisis de regresión (lineal y múltiple) a partir de las v
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
+<div style="text-align: justify">
+Exploring the relationship between environment and species traits facilitates general statements about the response
+of organisms to environmental constraints, beyond statements based solely on taxonomy. Such an understanding of an organism response to environment is necessary to generate predictive models of ecological community response to environmental changes (Keddy 1992). In many ecosystems, one important ecological driver causing environmental change is grazing by domestic and wild ungulates (Wardle & Bardgett 2004).
+<div/>  
+
+
+
+
+
+
 
 ```{r}
 DAW2 <- env[grep("^DAW2",rownames(env)),]
