@@ -46,8 +46,11 @@ Este objeto lista está formado a su vez por cuatro objetos
 <!-- crecientes a los puntos de bebida.  -->
 
 - Data frame que se llama **veg** que tiene la información sobre la proporción de cada  cada una de las especies en la superficie superior de la vegetación. Cada una de las filas se corresponde a los datos de las piosferas elegidas. Tenemos 378 piosferas y 87 tipos de especies.
+
 - Data frame que se llama **traits** que tiene la información de las características o rasgos de las plantas. Cada una de las filas se corresponde a los valores de las columnas del data frame **veg**. Es decir en este data frame tendremos 87 filas y 21 características
+
 - Data frame que se llama **env** que contiene la información de variables medioambientales relativas a las 378 piosferas que se han estudiado. Se han recopilado 25 variables
+
 - Vector llamado **habitat** es una variable tipo factor que describe el tipo de habitat de cada una de las piosferas.
 
 ```{r carga_librerias,echo=T, message=F, warning=F,comment=F}
@@ -117,7 +120,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 - Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -130,12 +133,11 @@ ind.tabla <- increment(ind.tabla,1)
 
 ```
 
-
 - Podemos asumir que las variaciones internas para las diferentes subáreas son significativas?
 
 - Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 especie<-colnames(piosphere$veg)[apply(piosphere$veg,1,which.max)]
 porcentaje<-apply(piosphere$veg,1,max)
@@ -145,7 +147,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 - Mostrar la especie que tiene el valor maximo para cada una de las caracteristicas numericas del data.frame traits 
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 caracteristicas.numericas<-sapply(piosphere$traits,class)
 caracteristicas.numericas<-names(caracteristicas.numericas)[caracteristicas.numericas=="numeric"]
@@ -154,33 +156,34 @@ data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% kable
 ind.tabla <- increment(ind.tabla,1)
 ```
 
-- Mostrar que especies cuyo ciclo vital es anual tienen consistencia de hoja mesomorfica suave
+- Mostrar que especies cuyo ciclo vital es anual tienen consistencia de hoja mesomórfica suave
 
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-piosphere$traits %>% mutate(especie=rownames(.)) %>%  filter(life.cycle=="annual") %>% filter(leaf.consistency=="soft-mesomorphic") %>% select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
+piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
+
 - Mostrar que piosferas tienen mayor inclinacion de la media
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 media.inclinacion<-mean(piosphere$env$Inclination,na.rm=T)
-piosphere$env %>% mutate(piosfera=rownames(.)) %>%  filter(Inclination>media.inclinacion) %>% select(piosfera,Inclination) %>% kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
+piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(Inclination>media.inclinacion) %>% dplyr::select(piosfera,Inclination) %>% kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
 - Mostrar que piosferas tienen valores nitritos, nitratos y phosphatos por encima del 75%
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 p75.nitritos<-quantile(piosphere$env$NO2,probs = 0.75)
 p75.nitratos<-quantile(piosphere$env$NO3,probs = 0.75)
 p75.phosphatos<-quantile(piosphere$env$PO4,probs = 0.75)
 
 
-piosphere$env %>% mutate(piosfera=rownames(.)) %>%  filter(NO2>p75.nitritos & NO3>p75.nitratos&PO4>p75.phosphatos) %>% select(piosfera,NO2,NO3,PO4) %>% kable(colnames=c("Piosfera","NO2","NO3","NO4"),caption = paste0(tab.1_cap,"Piosferas con valores superiores al 3er cuartil en nitritos, nitratos y phosphatos")) %>% kable_styling()
+piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(NO2>p75.nitritos & NO3>p75.nitratos&PO4>p75.phosphatos) %>% dplyr::select(piosfera,NO2,NO3,PO4) %>% kable(colnames=c("Piosfera","NO2","NO3","NO4"),caption = paste0(tab.1_cap,"Piosferas con valores superiores al 3er cuartil en nitritos, nitratos y phosphatos")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -193,6 +196,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
 <div style="text-align: justify">
+
 Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
 <div/>  
 
@@ -242,6 +246,13 @@ Above cover density (quant) ACD Percentage cover of the plant canopy above a ver
 Variable *height*
 
 
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% kableExtra::kable(caption = "Descripción de variable height,SLA y Diaspore Length") %>% kableExtra::kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
+
 ```{r cuatro_traits}
 #Medidas de distribución
 range(traits$height)
@@ -255,7 +266,7 @@ sd(traits$height)
 
 
 #Histograma
-ggplot(data=traits, aes(x=height)) + 
+plot.height<-ggplot(data=traits, aes(x=height)) + 
   geom_histogram(breaks=seq(0, 400, by=50), 
                  col="black", 
                  fill="steelblue", 
@@ -279,7 +290,7 @@ sd(traits$SLA)
 
 
 #Histograma
-ggplot(data=traits, aes(x=SLA)) + 
+plot.sla<-ggplot(data=traits, aes(x=SLA)) + 
   geom_histogram(col="black", 
                  fill="darkgreen", 
                  alpha = .6) + 
@@ -287,6 +298,10 @@ ggplot(data=traits, aes(x=SLA)) +
 ```
 
 
+```{r}
+cowplot::plot_grid(plot.height, plot.sla)
+
+```
 
 
 Variable *diaspore length*
@@ -326,7 +341,14 @@ logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) +
 grid.arrange(logDhist, logDboxplot, ncol=2)
 ```
 
+Comprobamos la normalidad de las tres variables
 
+```{r}
+apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
+```
+
+
+Describimos las variables categóricas **Lyfe Cycle**  y **Growth Form** 
 
 Variable **Lyfe Cycle**  
 ```{r}
@@ -336,6 +358,12 @@ table(traits$life.cycle) %>% kable(col.names = c("Life Cycle","Freq")) %>% kable
 round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
 ```
 
+```{r}
+p<-table(traits$life.cycle) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
+  geom_bar(stat="identity", fill="steelblue")+
+  theme_minimal()+xlab("Life Cycle")+ylab("Frecuencia")
+p
+```
 
 
 
@@ -346,13 +374,27 @@ table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq")) %>% kab
 round(100*prop.table(table(traits$growth.form)),4) %>% kable(col.names = c("Growth Form","Proporción")) %>% kable_styling()
 ```
 
-
+```{r}
+p<-round(100*prop.table(table(traits$growth.form)),4) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
+  geom_bar(stat="identity", fill="steelblue")+
+  theme_minimal()+xlab("Growth form")+ylab("Proporción")
+p
+```
 
 
 **Dataframe Env**
 <div style="text-align: justify">
 Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
 <div/>  
+
+
+
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+env %>% dplyr::select(pH,NO2, NO3, PO4) %>% psych::describe() %>% kableExtra::kable(caption = "Descripción de variable pH,NO2,NO3,PO4") %>% kableExtra::kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
 
 Variable **pH**
 
@@ -431,7 +473,11 @@ nut3 <- ggplot(data=env, aes(x=PO4)) +
 grid.arrange(nut1, nut2, nut3, ncol=3)
 ```
 
+Comprobamos la normalidad de las tres variables
 
+```{r}
+apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test)
+```
 
 **5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. **
 
