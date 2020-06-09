@@ -325,10 +325,6 @@ of organisms to environmental constraints, beyond statements based solely on tax
 
 
 
-
-
-
-
 ```{r}
 DAW2 <- env[grep("^DAW2",rownames(env)),]
 DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
@@ -338,6 +334,12 @@ apply(DAW2,2,sd)
 apply(DAW2,2,mean)
 ```
 
+
+```{r}
+model3 <- lm (GrazInt~logDist+ pH+PO4+NO3+NO2, data=env)
+             
+summary(model3)
+```
 
 
 Análisis de regresión para nutrientes y pH.
@@ -383,7 +385,7 @@ pairs(traitsc)
 
 #Creamos el modelo
 
-linearMod <- lm( meanSp ~ height+ ACD+ leaf.area+ leaf.ratio+ SLA+ spine.length+ seed.length+ diaspore.length, data=traitsc)
+linearMod <- lm(meanSp ~ height+ ACD+ leaf.area+ leaf.ratio+ SLA+ spine.length+ seed.length+ diaspore.length, data=traitsc)
 
 summary(linearMod)
 ```
