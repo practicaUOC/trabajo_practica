@@ -144,7 +144,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 **3. (1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc... Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.**
 
-- Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas
+- Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas, y extraer el número de especies que la ocupan.
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
@@ -415,7 +415,11 @@ p
 Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
 <div/>  
 
+Comprobamos la normalidad de las tres variables
 
+```{r}
+apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test)
+```
 
 ```{r}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
@@ -501,17 +505,13 @@ nut3 <- ggplot(data=env, aes(x=PO4)) +
 grid.arrange(nut1, nut2, nut3, ncol=3)
 ```
 
-Comprobamos la normalidad de las tres variables
 
-```{r}
-apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test)
-```
 
 **5. (1 punto) Realizad, basándoos en los conceptos trabajados en el LAB4 y PEC2, un mínimo de tres enunciados que respondan a una cuestión de probabilidad y un mínimo de un enunciado que corresponda a un breve modelo de simulación. En este caso, si vuestro conjunto de datos no propicia estos enunciados, podéis generar una o diversas distribuciones en base a unos parámetros determinados definidos por vosotros. **
 
 #### Cuestiones relativas a probabilidad
 
-Vamos a suponer que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(mean(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
+Vamos a *suponer* que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(median(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
 
 Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia inferior a 4 metros.
 
@@ -589,6 +589,53 @@ muestras_elegidas %>% kable %>% kable_styling()
 
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
+
+Calcular número de especies por piosfera
+
+```{r echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+num.especies<-apply(piosphere$veg,MARGIN = 1,FUN=function(x){sum(x!=0)})
+df.modelo.lineal<-cbind(num.especies,piosphere$env)
+shapiro.test(df.modelo.lineal$num.especies)
+```
+
+
+```{r echo=F}
+
+```
+
+
+```{r}
+modelo<-glm(formula=num.especies~logDist+pH+Conductivity,data =df.modelo.lineal,family = poisson )
+summary(modelo)
+
+dependent = "num.especies"
+explanatory = c("logDist", "pH","Conductivity","Skeleton","NO2")
+explanatory = df.modelo.lineal %>% dplyr::select(-num.especies,-Blocks) %>% colnames()
+
+explanatory_multi<-c("logDist", "pH","Conductivity","Skeleton")
+library(finalfit)
+fit_uni = df.modelo.lineal %>% 
+    glmuni(dependent, explanatory, family = poisson) %>% 
+    fit2df(estimate_name = "Rate ratio (univariable)")
+
+fit_multi = df.modelo.lineal %>% 
+    glmmulti(dependent, explanatory_multi, family = poisson) %>% 
+    fit2df(estimate_name = "Rate ratio (multivariable)")
+
+# All in one pipe
+df.modelo.lineal %>%
+    ## Crosstable
+    summary_factorlist(dependent, explanatory, cont = "median", fit_id=TRUE)  %>% 
+    
+    ## Add univariable
+    ff_merge(fit_uni, estimate_name = "Rate ratio") %>% 
+    
+    ## Add multivariable
+    ff_merge(fit_multi, estimate_name = "Rate ratio") %>% 
+    dependent_label(df.modelo.lineal, dependent) -> t
+t %>% kable() %>% kable_styling()
+```
 
 
 ```{r}
@@ -856,7 +903,7 @@ Aplicar test no paramétricos:
 
 ```{r}
 kruskal.test(df$GrazInt~df$habitat)
-compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T) %>% compareGroups::export2md()
+compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T,digits=5) %>% compareGroups::export2md()
 ```
 
 
