@@ -115,22 +115,76 @@ ind.tabla <- increment(ind.tabla,1)
 
 **3. (1,5 puntos) Realizad un mínimo de seis preguntas objetivo que den una idea de la información contenida en el conjunto de datos escogido, es decir, obtener información del conjunto de datos a partir de determinados criterios, según variables, o rangos de valores, etc... Para ello, podéis basaros en el tipo de consultas realizadas en la PEC1 y también utilizando, en alguno de los casos, la definición de funciones tal como se trabaja en el LAB3.**
 
-- Se me ocurre mostrar el porcentaje de especies que tienen datos en cada una de las piosferas
+- Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas
+
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
 
 - A colación de este, las diferencias porcentuales que puede haber entre las ST y las LT.
+
+```{r}
+
+```
+
 
 - Podemos asumir que las variaciones internas para las diferentes subáreas son significativas?
 
 - Mostrar la especie mayoritaria en cada una de las especies o sacar las caracteristicas relacionadas con dicha especie para cada piosfera
 
-- Mostrar la especie que tiene el valor maximo para cada una de las caracteristicas del data.frame traits 
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+especie<-colnames(piosphere$veg)[apply(piosphere$veg,1,which.max)]
+porcentaje<-apply(piosphere$veg,1,max)
+data.frame(`Especie Mayoritaria`=especie,Porcentaje=porcentaje) %>% kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especie mayoritaria en cada piosfera")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
 
-- Mostrar cuantas especies cuyo ciclo vital es anual tienen consistencia de hoja mesomorfica suave
+- Mostrar la especie que tiene el valor maximo para cada una de las caracteristicas numericas del data.frame traits 
 
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+caracteristicas.numericas<-sapply(piosphere$traits,class)
+caracteristicas.numericas<-names(caracteristicas.numericas)[caracteristicas.numericas=="numeric"]
+especie<-rownames(piosphere$traits)[apply(piosphere$traits[,caracteristicas.numericas],2,which.max)]
+data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especies con mayores caracteristicas")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
+- Mostrar que especies cuyo ciclo vital es anual tienen consistencia de hoja mesomorfica suave
+
+
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+piosphere$traits %>% mutate(especie=rownames(.)) %>%  filter(life.cycle=="annual") %>% filter(leaf.consistency=="soft-mesomorphic") %>% select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
 - Mostrar que piosferas tienen mayor inclinacion de la media
 
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+media.inclinacion<-mean(piosphere$env$Inclination,na.rm=T)
+piosphere$env %>% mutate(piosfera=rownames(.)) %>%  filter(Inclination>media.inclinacion) %>% select(piosfera,Inclination) %>% kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
 - Mostrar que piosferas tienen valores nitritos, nitratos y phosphatos por encima del 75%
-  
+
+```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+p75.nitritos<-quantile(piosphere$env$NO2,probs = 0.75)
+p75.nitratos<-quantile(piosphere$env$NO3,probs = 0.75)
+p75.phosphatos<-quantile(piosphere$env$PO4,probs = 0.75)
+
+
+piosphere$env %>% mutate(piosfera=rownames(.)) %>%  filter(NO2>p75.nitritos & NO3>p75.nitratos&PO4>p75.phosphatos) %>% select(piosfera,NO2,NO3,PO4) %>% kable(colnames=c("Piosfera","NO2","NO3","NO4"),caption = paste0(tab.1_cap,"Piosferas con valores superiores al 3er cuartil en nitritos, nitratos y phosphatos")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
+```
+
+
 - A colación de este, mostrar la distribución de pH, a que piosferas pertenecen la correlación con los nutrientes. (ej6)
 
 - Limitaciones de los índices de diversidad (simpson) en el contexto agronómico.
@@ -155,11 +209,11 @@ env <- piosphere$env
 #No se me ocurre una alternativa a agrupar las diferentes subáreas.
 
 Vamos a crear un nuevo data frame con los valores medios por área.
-```{r}
+```{r eval=F}
 
 ```
 
-```{r}
+```{r eval=F}
 ggplot(data=veg.means, aes(x=Era_por)) + 
   geom_histogram(col="black", 
                  fill="steelblue", 
@@ -550,7 +604,6 @@ Graficamos la distribución de las intensidades de los pastoreos según el tipo 
 
 ```{r}
 df<-data.frame(GrazInt=piosphere$env$GrazInt,habitat=piosphere$habitat)
-df<-df[!df$habitat%in%"stone",]
 ```
 
 ```{r}
@@ -599,14 +652,63 @@ En este punto podemos utilizar tres estrategías:
 
 - Aplicar test no paramétricos (Prueba de Kruskal-Wallis)
 
-```{r}
-outlier_values <- boxplot.stats(piosphere$env$GrazInt)$out 
-outlier_index<- which(!piosphere$env$GrazInt%in%outlier_values)
-df<-df[outlier_index,]
+Para utilizar la primera estrategía voy a probar
 
+- Transformar con logaritmos
+
+- Transformar con raices cuadradas
+
+- Transformaciones BoxCox, utilizadas tipicamente para corregir problemas de normalidad y heterocedasticidad.
+
+
+Tomando logaritmos:
+
+```{r}
+p <- df %>% mutate(log.Graz.Int=log(GrazInt)) %>% ggplot(aes(x=habitat, y=log.Graz.Int,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+Analizamos la normalidad de la variable transformada
+
+```{r}
+res.test.normalidad<-df %>% mutate(log.Graz.Int=log(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$log.Graz.Int)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+```
+
+```{r}
+df.log<-df %>% mutate(log.Graz.Int=log(GrazInt))
+test.homog.varianzas<-fligner.test(df.log$log.Graz.Int,df.log$habitat,df.log)
+test.homog.varianzas$p.value
 ```
 
 
+Analizamos la normalidad de la variable transformada con raices cuadradas
+
+```{r}
+p <- df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% ggplot(aes(x=habitat, y=sqrt.Graz.Int,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+
+```{r}
+res.test.normalidad<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$sqrt.Graz.Int)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+```
+
+```{r}
+df.sqrt<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt))
+test.homog.varianzas<-fligner.test(df.sqrt$sqrt.Graz.Int,df.sqrt$habitat,df.sqrt)
+test.homog.varianzas$p.value
+```
+
+
+Analizamos la normalidad de la variable transformada con la transformación de Box-Cox
 
 
 ```{r}
@@ -618,14 +720,12 @@ Cox = data.frame(Box$x, Box$y)
 Cox2 = Cox[with(Cox, order(-Cox$Box.y)),] 
 lambda = Cox2[1, "Box.x"]      
 T_box = (piosphere$env$GrazInt ^ lambda - 1)/lambda 
-T_box = (piosphere$env$GrazInt ^ lamba) 
-plotNormalHistogram(T_box)
 ```
 
 
 ```{r}
-df<-data.frame(GrazInt=T_box,habitat=piosphere$habitat)
-res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+df.boxcox<-data.frame(GrazInt_T_box=T_box,habitat=piosphere$habitat)
+res.test.normalidad<-df.boxcox %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt_T_box)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
 res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
@@ -634,10 +734,56 @@ res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %
 
 
 ```{r}
-test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
+test.homog.varianzas<-fligner.test(df.boxcox$GrazInt_T_box~df.boxcox$habitat,df.boxcox)
 test.homog.varianzas$p.value
 ```
 
+
+Detectaremos los datos atípicos de la muestra utilizando la función boxplot.stats
+
+
+```{r}
+outlier_values <- boxplot.stats(piosphere$env$GrazInt)$out 
+outlier_index<- which(!piosphere$env$GrazInt%in%outlier_values)
+df.sin.atipicos<-df[outlier_index,]
+```
+
+
+```{r}
+p <- ggplot(df.sin.atipicos, aes(x=habitat, y=GrazInt,fill=habitat)) + 
+  geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
+p
+```
+
+```{r}
+df.sin.atipicos %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
+```
+
+Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
+
+```{r}
+res.test.normalidad<-df.sin.atipicos %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df.sin.atipicos$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+
+```
+
+Al aplicar el test de homogeneidad de varianzas vemos que el p-valor obtenido en el test es inferior a 0,05 lo cual nos indica que no sigue las hipotesis necesarias para hacer el análisis de la varianza.
+
+```{r}
+test.homog.varianzas<-fligner.test(df.sin.atipicos$GrazInt~df.sin.atipicos$habitat,df)
+test.homog.varianzas$p.value
+```
+
+
+Aplicar test no paramétricos:
+
+
+```{r}
+kruskal.test(df$GrazInt~df$habitat)
+compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T) %>% compareGroups::export2md()
+```
 
 
 
