@@ -8,7 +8,6 @@ knitr::opts_chunk$set(echo = TRUE)
 ```
 
 
-![image](https://github.com/practicaUOC/trabajo_practica/blob/master/portada.jpg?raw=true)
 
 
 # Sección 1 (8 puntos) 
@@ -48,6 +47,11 @@ types are deep arenosols, shallow leptosols, calcisols and
 regosols. The study sites belong to the Nama-Karoo biome
 of southern Africa (Rutherford & Westfall 1994).
 [Wesus et al]
+
+
+
+
+![image](https://github.com/practicaUOC/trabajo_practica/blob/master/portada.jpg?raw=true)
 
 
 
