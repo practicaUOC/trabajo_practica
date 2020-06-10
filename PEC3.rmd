@@ -17,20 +17,29 @@ knitr::opts_chunk$set(echo = TRUE)
 
 
 <div style="text-align: justify">
-Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados según su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
+  Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados según su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
 
 
-Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país. La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas. [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
+  Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país. La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas. 
+  
 
-
-Con el objetivo de estudiar los efectos del pastoreo y sus consecuencias sobre la composición de especies, la estructura vegetal, los patrones de diversidad o los parámetros fisicoquímicos, el enfoque de las "piosferas" ha sido empleado con frecuencia en regiones de clima semiárido en diferentes regiones del globo(Perkins & Thomas 1993; Landsberg et al. 2003; Todd 2006; Sasaki et al. 2008). Este documento trabaja con los datos obtenidos en un estudio realizado en la región de Rehoboth, el cual investiga el impacto ejercido por el pastoreo ganadero en la distribución de las características de algunas especies en el ecosistema semiárido de la savana africana (Welsus et al,). Este estudio, emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
-1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*  
+  Con el objetivo de estudiar los efectos del pastoreo y sus consecuencias sobre la composición de especies, la estructura vegetal, los patrones de diversidad o los parámetros fisicoquímicos, el enfoque de las "piosferas" ha sido empleado con frecuencia en regiones de clima semiárido en diferentes regiones del globo(Perkins & Thomas 1993; Landsberg et al. 2003; Todd 2006; Sasaki et al. 2008). Este documento trabaja con los datos obtenidos en un estudio realizado en la región de Rehoboth, el cual investiga el impacto ejercido por el pastoreo ganadero en la distribución de las características de algunas especies en el ecosistema semiárido de la savana africana (Welsus et al. 2012). El estudio emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.  
 <div/>  
 
 
+References  
+
+- Landsberg, J., James, C.D., Morton, S.R., Mu¨ ller, W.J. & Stol, J. 2003. Abundance and composition of plant species along grazing gradients in Australian rangelands. Journal of Applied Ecology 40: 1008–1024.
+
+- Perkins, J.S. & Thomas, D.S.G. 1993. Environmental responses and sensitivity to permanent cattle ranching, semi-arid western central Botswana. In: Thomas, D.S.G. & Allison, R.J. (eds.) Landscape sensitivity, pp. 273–286. Wiley, Chichester, UK.
+
+- Todd, S.W. 2006. Gradients in vegetation cover, structure and species richness of Nama-Karoo shrublands in relation to distance from livestock watering points. Journal of Applied Ecology 43: 293–304.
+
+- Welsus, et al. 2012. Disentangling plant trait responses to livestock grazing from spatio‐temporal variation: the partial RLQ approach. Journal of Vegetation Science 23: 98-113.
 
 
-![image](https://github.com/practicaUOC/trabajo_practica/blob/master/portada.jpg?raw=true)
+
+![](https://github.com/practicaUOC/trabajo_practica/blob/master/portada.jpg?raw=true)
 
 
 
@@ -201,7 +210,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 - En relación al ejercicio anterior, correlacionar la presencia de nutrientes con la distribución del pH.
 
-Como se verá más adelante en la práctica y ya adelantamos, el pH presenta una distribución asimétrica, con dos picos bien definidos. Puede resultar interesante comprobar si alguno de los nutrientes presenta asociación a dicha distribución. Escogemos para visualizar concretamente PO4, debido a su carácter como factor limitante del crecimiento. Nos interesa una primera aproximación visual a la posible correlación entre ambas variables.
+Como se verá más adelante en la práctica y ya adelantamos, el pH presenta una distribución asimétrica, con dos picos bien definidos. Puede resultar interesante comprobar si alguno de los nutrientes presenta asociación a dicha distribución. Escogemos para visualizar concretamente PO4, debido a su carácter limitante como factor de crecimiento. Nos interesa una primera aproximación visual a la posible correlación entre ambas variables.
 
 ```{r, message=FALSE}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
@@ -243,7 +252,7 @@ ind.tabla <- increment(ind.tabla,1)
 **4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
 
 <div style="text-align: justify">
-Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una primera aproximación intuitiva a sus particularidades.  
+Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una primera aproximación intuitiva a sus particularidades.   
 <div/>  
 
 Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
@@ -262,7 +271,7 @@ nos van a proporcionar información sobre el conjunto de especies englobadas en 
 
 Comprobamos la normalidad de las tres variables cuantitativas
 
-```{r, echo=F}
+```{r}
 test <- apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
 pander(test)
 ```
@@ -271,9 +280,9 @@ pander(test)
 
 El p-valor es inferior al nivel de significación estándar 0.05 para las tres variables por lo que rechazamos H0 en todos los casos. Tenemos suficiente evidencia estadística para afirmar que estas variables no se ajustan a una distribución normal. Elaboramos un descriptivo y una representación gráfica para las variables.
 
-```{r}
+```{r, echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% kableExtra::kable(caption = "Descripción de variable height,SLA y Diaspore Length") %>% kableExtra::kable_styling()
+traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% kableExtra::kable(caption = paste0(tab.1_cap,"Descripción de variable height,SLA y Diaspore Length")) %>% kableExtra::kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -287,14 +296,14 @@ plot.height<-ggplot(data=traits, aes(x=height)) +
                  fill="steelblue", 
                  alpha = .6,
                  binwidth=25) + 
-  labs(title="Histograma para las alturas", x="Altura", y="Frecuencia")
+  labs(title="Histograma Height", x="Altura", y="Frecuencia")
 
 plot.sla<-ggplot(data=traits, aes(x=SLA)) + 
   geom_histogram(col="black", 
                  fill="darkgreen", 
                  alpha = .6,
                  binwidth=2) + 
-  labs(title="Histograma para SLA", x="SLA", y="Frecuencia")
+  labs(title="Histograma SLA", x="SLA", y="Frecuencia")
 
 
 logDHist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
@@ -302,7 +311,7 @@ logDHist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) +
                  fill="brown", 
                  alpha = .6,
                  binwidth=0.5) + 
-  labs(title="Longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
+  labs(title="Histograma Diaspore Length", x="Longitud de la diáspora", y="Frecuencia")
 
 
 logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) + 
@@ -310,13 +319,15 @@ logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) +
                  fill="brown", 
                  alpha = .6,
                  binwidth=5) + 
-  theme(axis.title.x=element_blank(),
-        axis.text.x=element_blank(),
-        axis.ticks.x=element_blank()) +
-  labs(title="Longitud de las diásporas", y="Longitud")
+  theme(axis.title.y=element_blank(),
+        axis.text.y=element_blank(),
+        axis.ticks.y=element_blank()) +
+  labs(title="Boxplot Diaspore length", y="Longitud de la diáspora")+
+  coord_flip()
 
-
-cowplot::plot_grid(plot.height, plot.sla, logDHist, logDboxplot)
+grid.arrange(plot.height, plot.sla, logDHist, logDboxplot,
+             ncol=2, nrow=2,
+             top = paste0(tab.1_cap,"Gráficos para height, SLA y Diaspore Length"))
 
 ind.tabla <- increment(ind.tabla,1)
 ```
@@ -324,13 +335,20 @@ ind.tabla <- increment(ind.tabla,1)
 
 
 
-Describimos las variables categóricas **Lyfe Cycle**  y **Growth Form** 
+Describimos las variables categóricas **Life Cycle**  y **Growth Form**  
 
-Variable **Lyfe Cycle**  
+Las tablas 17 y 18 presentan sus frecuencias, y la tabla 19 histogramas para ambas variables.  
+
+
 ```{r, echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+
+
 #Frecuencias y proporciones
-table(traits$life.cycle) %>% kable(col.names = c("Life Cycle","Freq")) %>% kable_styling()
+table(traits$life.cycle) %>% 
+  kable(col.names = c("Life Cycle","Freq"), caption = paste0(tab.1_cap,"Variable Life Cycle")) %>%
+  kable_styling()
+
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
 round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -341,7 +359,7 @@ ind.tabla <- increment(ind.tabla,1)
 Variable **Growth Form**  
 ```{r, echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq")) %>% kable_styling()
+table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq"), caption = paste0(tab.1_cap,"Variable Growth Form")) %>% kable_styling()
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
 round(100*prop.table(table(traits$growth.form)),4) %>% kable(col.names = c("Growth Form","Proporción")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -375,97 +393,56 @@ ind.tabla <- increment(ind.tabla,1)
 **Dataframe Env**
 
 <div style="text-align: justify">
-Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
+Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.  
 <div/>  
 
 Comprobamos la normalidad de las tres variables
 
-```{r}
+```{r, echo=F}
 pander(apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test))
 ```
 
-```{r}
+```{r, echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-env %>% dplyr::select(pH,NO2, NO3, PO4) %>% psych::describe() %>% kableExtra::kable(caption = "Descripción de variable pH,NO2,NO3,PO4") %>% kableExtra::kable_styling()
+env %>% dplyr::select(pH,NO2, NO3, PO4) %>% psych::describe() %>% kableExtra::kable(caption = paste0(tab.1_cap, "Descripción de variable pH,NO2,NO3,PO4")) %>% kableExtra::kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
 
-Variable **pH**
 
-```{r cuatro_env}
-#Medidas de distribución
-range(env$pH)
-quantile(env$pH)
-
-
-#Medidas de centralidad y dispersión
-mean(env$pH)
-median(env$pH)
-sd(env$pH)
-
-
+```{r cuatro_env, echo=F}
 #Histograma
-ggplot(data=env, aes(x=pH)) + 
+n1 <- ggplot(data=env, aes(x=pH)) + 
   geom_histogram(col="black", 
                  fill="steelblue", 
-                 alpha = .6) + 
-  labs(title="Histograma para el pH", x="pH", y="Frecuencia")
-```
+                 alpha = .6,
+                 binwidth=.1) + 
+  labs(title="Histograma pH", x="pH", y="Frecuencia")
 
-
-Variables **NO2**, **NO3** y **PO4**
-
-```{r}
-
-#Medidas de Distribución, NO2, NO3, PO4
-range(env$NO2)
-quantile(env$NO2)
-
-range(env$NO3)
-quantile(env$NO3)
-
-range(env$PO4)
-quantile(env$PO4)
-
-
-#Medidas de centralidad y dispersión  NO2, NO3, PO4
-mean(env$NO2)
-sd(env$NO2)
-
-mean(env$NO3)
-sd(env$NO3)
-
-mean(env$PO4)
-sd(env$PO4)
-```
-
-
-Representaciones gráficas
-
-```{r}
-#Representaciones gráficas
-nut1 <- ggplot(data=env, aes(x=NO2)) + 
+n2 <- ggplot(data=env, aes(x=NO2)) + 
   geom_histogram(col="black", 
                  fill="darkorange", 
-                 alpha = .6) + 
+                 alpha = .6,
+                 binwidth=.01) + 
   labs(title="Concentración NO2", x="NO2", y="Frecuencia")
   
-
-nut2 <- ggplot(data=env, aes(x=NO3)) + 
+n3 <- ggplot(data=env, aes(x=NO3)) + 
   geom_histogram(col="black", 
                  fill="darkorange", 
-                 alpha = .6) + 
+                 alpha = .6,
+                 binwidth=.5) + 
   labs(title="Concentración NO3", x="NO3", y="")
 
-nut3 <- ggplot(data=env, aes(x=PO4)) + 
+n4 <- ggplot(data=env, aes(x=PO4)) + 
   geom_histogram(col="black", 
                  fill="darkorange", 
-                 alpha = .6) + 
+                 alpha = .6,
+                 binwidth=.05) + 
   labs(title="Concentración PO4", x="PO4", y="")
 
 
-grid.arrange(nut1, nut2, nut3, ncol=3)
+grid.arrange(n1, n2, n3, n4, ncol=2, nrow=2,
+             top=paste0(tab.1_cap,"Niveles de pH, NO2, NO3 Y PO4"))
 ```
 
 
