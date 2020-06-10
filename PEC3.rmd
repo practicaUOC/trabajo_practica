@@ -280,7 +280,7 @@ pander(test)
 
 El p-valor es inferior al nivel de significación estándar 0.05 para las tres variables por lo que rechazamos H0 en todos los casos. Tenemos suficiente evidencia estadística para afirmar que estas variables no se ajustan a una distribución normal. Elaboramos un descriptivo y una representación gráfica para las variables.
 
-```{r, echo=F}
+```{r, echo=}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% kableExtra::kable(caption = paste0(tab.1_cap,"Descripción de variable height,SLA y Diaspore Length")) %>% kableExtra::kable_styling()
 ind.tabla <- increment(ind.tabla,1)
