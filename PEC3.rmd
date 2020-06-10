@@ -13,40 +13,19 @@ knitr::opts_chunk$set(echo = TRUE)
 # Sección 1 (8 puntos) 
 
 **1. (0,5 puntos)  Buscad un conjunto de datos relacionados con la Bioestadística o Bioinformática. Para ello, podéis utilizar algunos recursos conocidos como es el caso de http://www.bioinformatics.org/sms2/index.html o de http://biostat.mc.vanderbilt.edu/wiki/Main/DataSets.  **
-**También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.** 
+**También podéis utilizar otros recursos propios que conozcáis o que sean de vuestro interés, y siempre teniendo en cuenta que sean datos públicos que podéis utilizar.  Tenéis que explicar la procedencia de los datos así como incluir las referencias que correspondan y justificar porqué habéis elegido estos datos.**  
+
 
 <div style="text-align: justify">
 Una comprensión holística de los fenómenos ecológicos implica reducir la complejidad natural en factores y relaciones interpretables. Este reduccionismo viene facilitado por la elaboración de modelos matemáticos que permiten la comprensión de dichos fenómenos, la obtención de conclusiones y la elaboración de predicciones. Típicamente, los sistemas ecológicos han sido clasificados según su dinámica en sistemas en equilibrio y sistemas en no-equilibrio, de tal manera que aquellos cambios reversibles pertenecerían a un sistema en equilibrio, y los cambios no reversibles a los sistemas en no-equilibrio. El aumento de la capacidad computacional ha permitido durante las dos últimas décadas abordar modelos multinivel más complejos, que, si bien eran conocidos, no eran aplicables debido una insuficiente capacidad de cálculo. Estos nuevos enfoques determinan que las dinámicas ecológicas están englobadas en un continuo equilibrio, no-equilibrio; en vez de dos estados contrapuestos.  
 
 
-Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación, ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país.   [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
+Las llanuras de Rehoboth, en Namibia central, han permitido a algunos investigadores desarrollar estos nuevos modelos. Esta región semi-árida de estepa y poca vegetación ha sido durante cientos de años, y sigue siendo hoy en día, zona de pastoreo. A pesar de su contribución reducida al Producto Interior Bruto (PIB), la agricultura es un sector que se mantiene como fundamental para la mayoría de la población (algo más de dos millones de habitantes en 2019). De forma directa o indirecta, mantiene aproximadamente al 70% de la población del país. La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas. [http://www.fao.org/namibia/fao-in-namibia/namibia-at-a-glance/en/]  
 
 
-La elaboración de modelos que permitan realizar una explotación óptima de la estepa, a la vez que mantienen la dinámica de los pastizales, puede suponer enormes beneficios sobre la economía y salud de las personas.
-Nuestra atención se centra en el estudio elaborado por Wesuls, D. et al [1], y los datos obtenidos a partir de este (que se pueden encontrar en el repositorio "biosphere" en el paquete *ade4* de R). Este estudio, emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
+Con el objetivo de estudiar los efectos del pastoreo y sus consecuencias sobre la composición de especies, la estructura vegetal, los patrones de diversidad o los parámetros fisicoquímicos, el enfoque de las "piosferas" ha sido empleado con frecuencia en regiones de clima semiárido en diferentes regiones del globo(Perkins & Thomas 1993; Landsberg et al. 2003; Todd 2006; Sasaki et al. 2008). Este documento trabaja con los datos obtenidos en un estudio realizado en la región de Rehoboth, el cual investiga el impacto ejercido por el pastoreo ganadero en la distribución de las características de algunas especies en el ecosistema semiárido de la savana africana (Welsus et al,). Este estudio, emplea un conjunto jerárquico de modelos ecológicamente significativos con una complejidad creciente: el enfoque HOF (Huisman – Olff – Fresco) [enlace], para investigar las respuestas de pastoreo de las especies, los parámetros de diversidad y los valores de cobertura agrupados para dos rasgos: forma de crecimiento y ciclo de vida.
 1.*The grazing fingerprint: Modelling species responses and trait patterns alonggrazing gradients in semi-arid Namibian rangelands*  
 <div/>  
-
-In order to study grazing-induced changes in plant species composition, vegetation structure, diversity patterns or soil parameters the piosphere approach has been frequently applied in studies in many semi-arid regions around the world (Perkins & Thomas 1993; Landsberg et al. 2003; Todd 2006; Sasaki et al. 2008).
-
-In the present study, we investigated the influence of
-livestock grazing on the distribution of plant traits in a
-semi-arid African savanna ecosystem. 
-
-
-Our study area comprises ten farms in central Namibia,
-southern Africa (Fig. 1) near the town of Rehoboth (23.3°
-S, 17.1°E). It is located in the Namibian Central Highland
-foothills (ca. 1400 m a.s.l.) with a relatively flat topography and scattered mountainous terrain. The climate is
-semi-arid, with an average annual rainfall ranging from
-200 to 300 mm, typically occurring during the summer
-months of Dec to Mar. The rainfall is highly variable spatially and temporally, with a coefficient of variation of up
-to 40% (Mendelsohn et al. 2002). The average daily temperatures range from 17 °C in the winter months to 25 °C
-in summer. Soils vary from sandy to loamy. Dominant soil
-types are deep arenosols, shallow leptosols, calcisols and
-regosols. The study sites belong to the Nama-Karoo biome
-of southern Africa (Rutherford & Westfall 1994).
-[Wesus et al]
 
 
 
@@ -60,7 +39,8 @@ of southern Africa (Rutherford & Westfall 1994).
 Hemos utilizado un dataset que pertenece al paquete de R llamado ade4.  La manera de importar es con la función *data* del paquete base de R. En este caso no es necesario utilizar funciones como read.delim, read.csv o read.table de las utilidades de R que son las habituales para importar ficheros de texto, o la función read.xlsx de la librería xlsx para importar ficheros en formato excel, o read.spss del paquete foreign para leer ficheros procedentes del paquete estadístico SPSS.
 
 La particularidad de este dataset es que viene definido a través de un objeto *lista* llamado *piosphere*. 
-Este objeto lista está formado a su vez por cuatro objetos
+Este objeto lista está formado a su vez por cuatro objetos. 
+
 
 <!-- La presión que ejercen los animales sobre los recursos, no se presenta -->
 <!-- uniformemente a lo largo del lote, esta ampliamente aceptado que la presión es -->
@@ -86,10 +66,15 @@ library(dplyr)
 library(ggplot2)
 library(kableExtra)
 library(captioner)
-library(ade4)
 library(gridExtra)
 library(pROC)
 library(cutpointr)
+library(finalfit)
+library(psych)
+library(survival)
+library(ggpubr)
+library(grid)
+library(pander)
 ind.tabla<-1
 ind.figura<-0
 table_nums <- captioner(prefix = "Tabla.")
@@ -100,8 +85,16 @@ table_nums <- captioner(prefix = "Tabla.")
 data("piosphere")
 ```
 
+Obtenemos tres data frames para cada una de las listas.
+```{r}
+veg <- piosphere$veg
+traits <- piosphere$traits
+env <- piosphere$env
+```
 
-```{r echo=F}
+
+
+```{r}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 piosphere$veg %>% head() %>% kable(caption = paste0(tab.1_cap,"Primeras seis filas de Data Frame veg")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -146,14 +139,12 @@ ind.tabla <- increment(ind.tabla,1)
 
 - Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas, y extraer el número de especies que la ocupan.
 
-```{r echo=F}
+```{r}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()
+apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% head(10) %>%  kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
-
-- Podemos asumir que las variaciones internas para las diferentes subáreas son significativas?
 
 - Mostrar la especie mayoritaria en cada una de las especies
 
@@ -161,7 +152,7 @@ ind.tabla <- increment(ind.tabla,1)
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 especie<-colnames(piosphere$veg)[apply(piosphere$veg,1,which.max)]
 porcentaje<-apply(piosphere$veg,1,max)
-data.frame(`Especie Mayoritaria`=especie,Porcentaje=porcentaje) %>% kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especie mayoritaria en cada piosfera")) %>% kable_styling()
+data.frame(`Especie Mayoritaria`=especie,Porcentaje=porcentaje) %>% head(10) %>%  kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especie mayoritaria en cada piosfera")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -172,7 +163,7 @@ tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 caracteristicas.numericas<-sapply(piosphere$traits,class)
 caracteristicas.numericas<-names(caracteristicas.numericas)[caracteristicas.numericas=="numeric"]
 especie<-rownames(piosphere$traits)[apply(piosphere$traits[,caracteristicas.numericas],2,which.max)]
-data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especies con mayores caracteristicas")) %>% kable_styling()
+data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% head(10) %>%   kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especies con mayores caracteristicas")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -181,7 +172,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% dplyr::filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
+piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% dplyr::filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% head(10) %>%   kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -190,7 +181,7 @@ ind.tabla <- increment(ind.tabla,1)
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 media.inclinacion<-mean(piosphere$env$Inclination,na.rm=T)
-piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(Inclination>media.inclinacion) %>% dplyr::select(piosfera,Inclination) %>% kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
+piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(Inclination>media.inclinacion) %>% dplyr::select(piosfera,Inclination) %>% head(10) %>%  kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -203,81 +194,82 @@ p75.nitratos<-quantile(piosphere$env$NO3,probs = 0.75)
 p75.phosphatos<-quantile(piosphere$env$PO4,probs = 0.75)
 
 
-piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(NO2>p75.nitritos & NO3>p75.nitratos&PO4>p75.phosphatos) %>% dplyr::select(piosfera,NO2,NO3,PO4) %>% kable(colnames=c("Piosfera","NO2","NO3","NO4"),caption = paste0(tab.1_cap,"Piosferas con valores superiores al 3er cuartil en nitritos, nitratos y phosphatos")) %>% kable_styling()
+piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(NO2>p75.nitritos & NO3>p75.nitratos&PO4>p75.phosphatos) %>% dplyr::select(piosfera,NO2,NO3,PO4) %>% head(10) %>%   kable(colnames=c("Piosfera","NO2","NO3","NO4"),caption = paste0(tab.1_cap,"Piosferas con valores superiores al 3er cuartil en nitritos, nitratos y phosphatos")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
 
-- A colación de este, mostrar la distribución de pH, a que piosferas pertenecen la correlación con los nutrientes. (ej6)
-```{r}
+- En relación al ejercicio anterior, correlacionar la presencia de nutrientes con la distribución del pH.
 
-plot(piosphere$env[piosphere$env$PO4!=0,]$pH,piosphere$env[piosphere$env$PO4!=0,]$PO4)
-```
+Como se verá más adelante en la práctica y ya adelantamos, el pH presenta una distribución asimétrica, con dos picos bien definidos. Puede resultar interesante comprobar si alguno de los nutrientes presenta asociación a dicha distribución. Escogemos para visualizar concretamente PO4, debido a su carácter como factor limitante del crecimiento. Nos interesa una primera aproximación visual a la posible correlación entre ambas variables.
 
+```{r, message=FALSE}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 
-- Limitaciones de los índices de diversidad (simpson) en el contexto agronómico.
-[http://www.umass.edu/landeco/research/fragstats/documents/Metrics/Diversity%20Metrics/Limitations.htm] 
-
-
-**4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
-<div style="text-align: justify">
-
-Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una aproximación intuitiva a las particularidades de nuestros datos.
-<div/>  
-
-Obtenemos tres data frames para cada una de las listas.
-```{r}
-veg <- piosphere$veg
-traits <- piosphere$traits
-env <- piosphere$env
-```
-
-
-
-#Con respecto al df veg, previo al análisis paramétrico es necesario tratar los datos.
-#No se me ocurre una alternativa a agrupar las diferentes subáreas.
-
-Vamos a crear un nuevo data frame con los valores medios por área.
-```{r eval=F}
-
-```
-
-```{r eval=F}
-ggplot(data=veg.means, aes(x=Era_por)) + 
+#Gráficas para pH y PO4/pH
+pHhist <- ggplot(data=env, aes(x=pH)) + 
   geom_histogram(col="black", 
                  fill="steelblue", 
                  alpha = .6) + 
-  labs(title="Aca_eri", x="Concentración", y="Frecuencia")
+  geom_vline(xintercept = median(env$pH), col = 2, lty = 2)+
+  labs(x="pH", y="Frecuencia")
+pHPO4 <- ggplot(data=env, aes(x=pH, y=PO4)) + 
+  geom_point(col="steelblue",
+               alpha = .8) + 
+  geom_vline(xintercept = median(env$pH), col = 2, lty = 2) +
+  labs(x="pH", y="PO4(ppm)")
+
+#Texto pie de figura
+text <- paste("Como podemos observar, parece haber una relación, ",
+              "aunque ligera, entre ambas variables.", 
+              "El pH presenta dos picos bien diferenciados y el PO4",
+              "parece a su vez seguir cierta relación",
+              "aunque sería necesaria una mayor confianza estadística",
+              "para poder afirmarlo",
+              sep = " ")
+text.p <- ggparagraph(text = text, face = "italic", size = 11, color = "black")  
+
+#Ensamblado
+grid.arrange(pHhist, pHPO4, text.p,
+             ncol=2, nrow=2,
+             layout_matrix=rbind(c(1,2),
+                                 c(3,3)),
+             top = paste0(tab.1_cap,"Comparación PO4/pH"))
+ind.tabla <- increment(ind.tabla,1)
 ```
 
 
+
+**4. (1,5 puntos) Realizad un análisis descriptivo de los datos. Este estudio debe incluir, un resumen paramétrico de los datos y diversas representaciones gráficas de los mismos basadas en determinados criterios. Dejamos a vuestra elección el tipo de gráficos y los criterios utilizados.**
+
+<div style="text-align: justify">
+Para los diferentes data frames contenidos en la lista *piosphere*, vamos a realizar un estudio obteniendo parámetros de tendencia central y dispersión, así como representaciones gráficas para algunas de sus variables, y distribuciones de frecuencias cuando sea necesario; lo cual nos permitirá una primera aproximación intuitiva a sus particularidades.  
+<div/>  
 
 Para el data frame **traits** nos vamos a centrar en algunas de las variables que nos parecen significativas en su contexto ecológico.
 
 Las variables 
 
-- *height* 
-- *SLA* (leaf traits)
+- *height*
+- *SLA*
 - *diaspore length* 
 - *life cycle* 
 - *Growth Form*
 
 nos van a proporcionar información sobre el conjunto de especies englobadas en nuestro dataset, e incluso, sobre las características del bioma al que pertenecen. 
 
-(Specific leaf area (quant) SLA Specific leaf area (mm² mg1), i.e. leaf area divided by dry weight of the leaf
-
-Above cover density (quant) ACD Percentage cover of the plant canopy above a vertically projected contour of the plant)
 
 
-Comprobamos la normalidad de las tres variables
+Comprobamos la normalidad de las tres variables cuantitativas
 
-```{r}
-apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
+```{r, echo=F}
+test <- apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
+pander(test)
 ```
 
 
-Variable *height*
 
+El p-valor es inferior al nivel de significación estándar 0.05 para las tres variables por lo que rechazamos H0 en todos los casos. Tenemos suficiente evidencia estadística para afirmar que estas variables no se ajustan a una distribución normal. Elaboramos un descriptivo y una representación gráfica para las variables.
 
 ```{r}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
@@ -285,92 +277,48 @@ traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% k
 ind.tabla <- increment(ind.tabla,1)
 ```
 
+ 
+```{r, echo=F, warning=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 
-```{r cuatro_traits}
-#Medidas de distribución
-range(traits$height)
-quantile(traits$height)
-
-
-#Medidas de centralidad y dispersión
-mean(traits$height)
-median(traits$height)
-sd(traits$height)
-
-
-#Histograma
 plot.height<-ggplot(data=traits, aes(x=height)) + 
   geom_histogram(breaks=seq(0, 400, by=50), 
                  col="black", 
                  fill="steelblue", 
-                 alpha = .6) + 
+                 alpha = .6,
+                 binwidth=25) + 
   labs(title="Histograma para las alturas", x="Altura", y="Frecuencia")
-```
 
-
-Variable SLA
-
-```{r}
-#Medidas de distribución
-range(traits$SLA)
-quantile(traits$SLA)
-
-
-#Medidas de centralidad y dispersión
-mean(traits$SLA)
-median(traits$SLA)
-sd(traits$SLA)
-
-
-#Histograma
 plot.sla<-ggplot(data=traits, aes(x=SLA)) + 
   geom_histogram(col="black", 
                  fill="darkgreen", 
-                 alpha = .6) + 
+                 alpha = .6,
+                 binwidth=2) + 
   labs(title="Histograma para SLA", x="SLA", y="Frecuencia")
-```
 
 
-```{r}
-cowplot::plot_grid(plot.height, plot.sla)
-
-```
-
-
-Variable *diaspore length*
-
-```{r, warning=FALSE}
-#Medidas de distribución
-attach(traits)
-range(diaspore.length)
-quantile(diaspore.length)
-
-
-#Medidas de centralidad y dispersión
-mean(diaspore.length)
-median(diaspore.length)
-sd(diaspore.length)
-
-
-#Histograma en log
-logDhist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
+logDHist <- ggplot(data=traits, aes(x=log(traits$diaspore.length))) + 
   geom_histogram(col="black", 
-                 fill="darkgreen", 
+                 fill="brown", 
                  alpha = .6,
                  binwidth=0.5) + 
   labs(title="Longitud de las diásporas", x="Longitud de la diáspora", y="Frecuencia")
 
 
-#Boxplot en log
 logDboxplot <- ggplot(data=traits, aes(y=log(traits$diaspore.length))) + 
   geom_boxplot(col="black", 
-                 fill="darkgreen", 
+                 fill="brown", 
                  alpha = .6,
                  binwidth=5) + 
-  labs(title="Longitud de las diásporas", y="Longitud", x="Diáspora")
+  theme(axis.title.x=element_blank(),
+        axis.text.x=element_blank(),
+        axis.ticks.x=element_blank()) +
+  labs(title="Longitud de las diásporas", y="Longitud")
 
 
-grid.arrange(logDhist, logDboxplot, ncol=2)
+cowplot::plot_grid(plot.height, plot.sla, logDHist, logDboxplot)
+
+ind.tabla <- increment(ind.tabla,1)
 ```
 
 
@@ -379,38 +327,53 @@ grid.arrange(logDhist, logDboxplot, ncol=2)
 Describimos las variables categóricas **Lyfe Cycle**  y **Growth Form** 
 
 Variable **Lyfe Cycle**  
-```{r}
+```{r, echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 #Frecuencias y proporciones
 table(traits$life.cycle) %>% kable(col.names = c("Life Cycle","Freq")) %>% kable_styling()
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
 round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
-```
-
-```{r}
-p<-table(traits$life.cycle) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
-  geom_bar(stat="identity", fill="steelblue")+
-  theme_minimal()+xlab("Life Cycle")+ylab("Frecuencia")
-p
+ind.tabla <- increment(ind.tabla,1)
 ```
 
 
 
 Variable **Growth Form**  
-```{r}
+```{r, echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 table(traits$growth.form) %>% kable(col.names = c("Growth Form","Freq")) %>% kable_styling()
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
 round(100*prop.table(table(traits$growth.form)),4) %>% kable(col.names = c("Growth Form","Proporción")) %>% kable_styling()
+ind.tabla <- increment(ind.tabla,1)
 ```
 
-```{r}
-p<-round(100*prop.table(table(traits$growth.form)),4) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
-  geom_bar(stat="identity", fill="steelblue")+
+
+
+```{r, echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+p<-table(traits$life.cycle) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
+  geom_bar(stat="identity", fill="steelblue", alpha=.8)+
+  theme_minimal()+xlab("Life Cycle")+ylab("Frecuencia")
+
+
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+p2<-round(100*prop.table(table(traits$growth.form)),4) %>% data.frame() %>% ggplot(aes(x=Var1, y=Freq)) +
+  geom_bar(stat="identity", fill="steelblue", alpha=.8)+
   theme_minimal()+xlab("Growth form")+ylab("Proporción")
-p
+
+grid.arrange(p, p2,
+             ncol=2, nrow=1,
+             top = paste0(tab.1_cap,"Histogramas para Lyfe Cycle y Growth Form"))
+
+ind.tabla <- increment(ind.tabla,1)
 ```
+
+
+
 
 
 **Dataframe Env**
+
 <div style="text-align: justify">
 Las variables fisico-químicas nos van a proporcionar una información amplia sobre los requerimientos nutricionales y ambientales que puede presentar nuestra muestra de estudio, y la flora de la región a la que pertenece. Va a ser fundamental en la elaboración de hipótesis y la obtención de conclusiones.  A continuación presentamos las proporciones, así como parámetros de centralidad y dispersión, y representaciones gráficas para algunas de las variables.
 <div/>  
@@ -418,7 +381,7 @@ Las variables fisico-químicas nos van a proporcionar una información amplia so
 Comprobamos la normalidad de las tres variables
 
 ```{r}
-apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test)
+pander(apply(env[,c("pH","NO2","NO3","PO4")],MARGIN = 2,FUN = shapiro.test))
 ```
 
 ```{r}
@@ -451,7 +414,7 @@ ggplot(data=env, aes(x=pH)) +
 ```
 
 
-Variable **nutrients**
+Variables **NO2**, **NO3** y **PO4**
 
 ```{r}
 
@@ -590,6 +553,8 @@ muestras_elegidas %>% kable %>% kable_styling()
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
+#Planteamos
+
 Calcular número de especies por piosfera
 
 ```{r echo=F}
@@ -650,50 +615,6 @@ apply(DAW2,2,mean)
 
 
 Previo a la realización de un análisis de regresión planteamos aquellas correlaciones que pueden proporcionar información  a nivel ecológico, posteriormente planteamos un análisis visual y estadístico para observar si dichas variables presentan una correlación.
-
-
-```{r}
-#Creamos un df con nuestras variables de interés, para poder realizar un análisis gráfico
-nutrients <- cbind(env[4], env[15], env[17], env[18], env[19])
-
-pairs(nutrients)
-cor(nutrients)
-
-#No encontramos una correlación marcada para las diferentes características físico-químicas de la muestra. Sin embargo, si podemos observar una relación entre las variables height, spine length y seed length, del data frame de variables fisiológicas.
-
-cor(traits[1:9])
-
-reg <- cbind(traits[1], traits[7], traits[8])
-pairs(reg)
-```
-
-
-
-Un modelo podría ser la producción de la especie, en general, y con subniveles (para cada una de las zonas), y diferentes características propias de la especie.
-
-```{r seistraits}
-#Obtenemos una nueva variable para las medias
-vegMeans <- as.data.frame(colMeans(veg[sapply(veg, is.numeric)])) 
-
-#Cambiamos el nombre de la columna
-names(vegMeans)[names(vegMeans) == "colMeans(veg[sapply(veg, is.numeric)])"] <- "meanSp"
-
-# Creamos un nuevo df con la variable "meanSp" y que incluya únicamente las variables cuantitativas, lo que nos permite calcular correlaciones
-traitsc <- cbind(traits[1:9], vegMeans)
-```
-
-
-
-```{r}
-cor(traitsc)
-pairs(traitsc)
-
-#Creamos el modelo
-
-linearMod <- lm( meanSp ~ height+ ACD+ leaf.area+ leaf.consistency+ leaf.ratio+ SLA+ spine.length+ seed.length+ diaspore.length, data=traitsc)
-
-summary(linearMod)
-```
 
 Como indicaban los valores de correlación, no parece haber una regresión pronunciada entre las características fisiológicas de las especies, y su presencia media. 
 
