@@ -8,7 +8,8 @@
 #
 
 library(shiny)
-
+library(dplyr)
+library(ggplot2)
 function(input, output, session) {
     
     # Combine the selected variables into a new data frame

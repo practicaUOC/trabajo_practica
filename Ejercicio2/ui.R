@@ -27,7 +27,6 @@ pageWithSidebar(
     mainPanel(
         tabsetPanel(type = "tabs",
         tabPanel("Descriptivos",  
-        textOutput("data_frame_elegido"),
         tableOutput("summary_numeric"),
         plotOutput("plot")),
         tabPanel("Medioambiente por tipo"  
