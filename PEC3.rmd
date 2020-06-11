@@ -217,7 +217,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 Como se verá más adelante en la práctica y ya adelantamos, el pH presenta una distribución asimétrica, con dos picos bien definidos. Puede resultar interesante comprobar si alguno de los nutrientes presenta asociación a dicha distribución. Escogemos para visualizar concretamente PO4, debido a su carácter limitante como factor de crecimiento. Nos interesa una primera aproximación visual a la posible correlación entre ambas variables.
 
-```{r, message=FALSE}
+```{r, echo =F,message=FALSE}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 
 #Gráficas para pH y PO4/pH
@@ -276,7 +276,7 @@ nos van a proporcionar información sobre el conjunto de especies englobadas en 
 
 Comprobamos la normalidad de las tres variables cuantitativas
 
-```{r}
+```{r,echo=F}
 test <- apply(traits[,c("height","SLA","diaspore.length")],MARGIN = 2,FUN = shapiro.test)
 pander(test)
 ```
@@ -351,11 +351,12 @@ tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 
 #Frecuencias y proporciones
 table(traits$life.cycle) %>% 
-  kable(col.names = c("Life Cycle","Freq"), caption = paste0(tab.1_cap,"Variable Life Cycle")) %>%
+  kable(col.names = c("Life Cycle","Freq"), caption = paste0(tab.1_cap,"Frecuencias absolutas Variable Life Cycle")) %>%
   kable_styling()
-
+ind.tabla<-increment(ind.tabla,1)
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 # table(traits$life.cycle)/sum(table(traits$life.cycle)) %>% kable() %>% kable_styling()
-round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción")) %>% kable_styling()
+round(100*prop.table(table(traits$life.cycle)),4) %>% kable(col.names = c("Life Cycle","Proporción"), caption = paste0(tab.1_cap,"Frecuencias relativas  Life Cycle")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -456,7 +457,7 @@ grid.arrange(n1, n2, n3, n4, ncol=2, nrow=2,
 
 #### Cuestiones relativas a probabilidad
 
-Vamos a *suponer* que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(median(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
+Vamos a **suponer** que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(mean(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
 
 - **Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia inferior a 4 metros.**
 
@@ -480,9 +481,8 @@ Utilizando la técnica de curvas ROC primero buscaremos cual es la característi
 <!-- control = exposed, case = not exposed -->
 
 
-```{r message=F}
+```{r, echo=F, message=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-piosphere$traits %>% select(leaf.ratio,flower.position)
 tipos.de.variables<-sapply(piosphere$traits,class)
 variables.estudio<-colnames(piosphere$traits)[tipos.de.variables=="numeric"]
 lista.de.curvas.roc<-lapply(variables.estudio,FUN=function(variable){
@@ -503,8 +503,7 @@ También podemos decir que si el ratio de la hoja es mayor de 23,28 con una prob
 
 Con una probabilidad del 75,86% la posición floral en nuestra muestra es expuesta.
 
-
-```{r}
+```{r, echo=F, message=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 cp <- cutpointr(data = piosphere$traits,class = flower.position , x = leaf.ratio, 
                 method = maximize_metric, metric = sum_sens_spec)
@@ -512,8 +511,7 @@ cp %>% kable(caption=paste0(tab.1_cap,"Estadisticos relativos a la curva ROC")) 
 ind.tabla<-increment(ind.tabla,1)
 ```
 
-
-#### Cuestión relativa a simulación 
+Cuestión relativa a simulación 
 
 - Suponemos que tenemos que elegir 40 piosferas para hacer un subanalisis, de las cuales 8 tienen que ser calc, 16 sand07, 8 sand08, y 8 stone. Haremos una simulación de extracción y comprobaremos si alguna de las muestras elegidas cumple esos criterios.
 
@@ -530,7 +528,7 @@ all(tabla_muestras==c(8,16,8,8))
 
 Las muestras elegidas son 
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 muestras_elegidas %>% kable(caption=paste0(tab.1_cap,"Muestras seleccionadas")) %>% kable_styling()
 ind.tabla<-increment(ind.tabla,1)
@@ -539,7 +537,7 @@ ind.tabla<-increment(ind.tabla,1)
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
-#Planteamos
+
 
 Queremos analizar la relación del número de especies según las caracteristicas medioambientales de las piosferas
 
@@ -553,7 +551,7 @@ shapiro.test(df.modelo.lineal$num.especies)
 ```
 
 
-```{r fig.cap="Histograma del Número de Especies"}
+```{r echo=F, fig.cap="Histograma del Número de Especies"}
 plot.num.especies <- ggplot(data=df.modelo.lineal, aes(x=num.especies)) + 
   geom_histogram(col="black", 
                  fill="darkorange", 
