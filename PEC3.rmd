@@ -84,6 +84,7 @@ library(survival)
 library(ggpubr)
 library(grid)
 library(pander)
+library(finalfit)
 ind.tabla<-1
 ind.figura<-0
 table_nums <- captioner(prefix = "Tabla.")
@@ -543,11 +544,11 @@ Queremos analizar la relación del número de especies según las caracteristica
 
 Calcular número de especies por piosfera
 
-```{r echo=F}
+```{r echo=F, message=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 num.especies<-apply(piosphere$veg,MARGIN = 1,FUN=function(x){sum(x!=0)})
 df.modelo.lineal<-cbind(num.especies,piosphere$env)
-shapiro.test(df.modelo.lineal$num.especies)
+shapiro.test(df.modelo.lineal$num.especies) %>% pander()
 ```
 
 
@@ -565,16 +566,16 @@ plot.num.especies
 Como hemos visto rechazamos la hipotesis de normalidad (p valor inferior  a 0,05 en el test de Shapiro-Wilk), esto junto a que se trata una variable de conteos, vamos a considerar utilizar modelos lineales generalizados basados en la distribución de Poisson.
 
 
-```{r}
+```{r echo=F, message=F}
 modelo<-glm(formula=num.especies~logDist+pH+Conductivity,data =df.modelo.lineal,family = poisson )
-summary(modelo)
+
 
 dependent = "num.especies"
 explanatory = c("logDist", "pH","Conductivity","Skeleton","NO2")
 explanatory = df.modelo.lineal %>% dplyr::select(-num.especies,-Blocks) %>% colnames()
 
 explanatory_multi<-c("logDist", "pH","Conductivity","Skeleton")
-library(finalfit)
+
 fit_uni = df.modelo.lineal %>% 
     glmuni(dependent, explanatory, family = poisson) %>% 
     fit2df(estimate_name = "Rate ratio (univariable)")
@@ -600,7 +601,7 @@ ind.tabla<-increment(ind.tabla,1)
 ```
 
 
-```{r eval=F}
+```{r eval=F, echo=F}
 DAW2 <- env[grep("^DAW2",rownames(env)),]
 DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
 
@@ -617,21 +618,7 @@ Como indicaban los valores de correlación, no parece haber una regresión pronu
 
 Esto podría indicar una variedad en las condiciones ambientales para los diferentes territorios, que implicase la distorsión de posibles correlaciones para ambientes concretos. Podríamos realizar un análisis de regresión multinivel, para cada uno de los diferentes ambientes. O bien, que no exista esa correlación entre características fisiológicas y presencia.
 
-```{r seisveg}
 
-#Regresionmultinivel: veg ~ variables
-
-```
-
-<<<<<<< HEAD
-
-
-
-
-
-6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.
-=======
->>>>>>> 06c0aa62f9c6e30419bd9f88cb99a12c20397216
 
 **7. (1 punto) A partir del conjunto de datos que estáis trabajando, plantead un estudio ANOVA y desarrollado si, a partir del estudio previo, se cumplen las condiciones.**
 
