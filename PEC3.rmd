@@ -29,7 +29,7 @@ knitr::opts_chunk$set(echo = TRUE)
 
 References  
 
-- Landsberg, J., James, C.D., Morton, S.R., Mu¨ ller, W.J. & Stol, J. 2003. Abundance and composition of plant species along grazing gradients in Australian rangelands. Journal of Applied Ecology 40: 1008–1024.
+- Landsberg, J., James, C.D., Morton, S.R., Müller, W.J. & Stol, J. 2003. Abundance and composition of plant species along grazing gradients in Australian rangelands. Journal of Applied Ecology 40: 1008–1024.
 
 - Perkins, J.S. & Thomas, D.S.G. 1993. Environmental responses and sensitivity to permanent cattle ranching, semi-arid western central Botswana. In: Thomas, D.S.G. & Allison, R.J. (eds.) Landscape sensitivity, pp. 273–286. Wiley, Chichester, UK.
 
@@ -103,7 +103,7 @@ env <- piosphere$env
 
 
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 piosphere$veg %>% head() %>% kable(caption = paste0(tab.1_cap,"Primeras seis filas de Data Frame veg")) %>% kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -122,7 +122,7 @@ ind.tabla <- increment(ind.tabla,1)
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-sapply(piosphere$traits,class)%>% kable(caption = paste0(tab.1_cap,"Clasificación de las variables que definen los rasgos de las especies"),col.names = "Tipo de Variable") %>% kable_styling()
+sapply(piosphere$traits,class)%>% head()%>%  kable(caption = paste0(tab.1_cap,"Clasificación de las variables que definen los rasgos de las especies"),col.names = "Tipo de Variable") %>% kable_styling() %>%  add_footnote("Se muestran sólo seis primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -133,7 +133,7 @@ piosphere$env %>% head() %>% kable(caption = paste0(tab.1_cap,"Primeras seis fil
 ind.tabla <- increment(ind.tabla,1)
 
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-sapply(piosphere$env,class)%>% kable(caption = paste0(tab.1_cap,"Clasificación de las variables que definen las variables medioambientales recogidas"),col.names = "Tipo de Variable") %>% kable_styling()
+sapply(piosphere$env,class)%>% head() %>% kable(caption = paste0(tab.1_cap,"Clasificación de las variables que definen las variables medioambientales recogidas"),col.names = "Tipo de Variable") %>% kable_styling() %>%  add_footnote("Se muestran sólo seis primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -148,12 +148,17 @@ ind.tabla <- increment(ind.tabla,1)
 
 - Mostrar el porcentaje de especies que tienen datos en cada una de las piosferas, y extraer el número de especies que la ocupan.
 
-```{r}
+```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% head(10) %>%  kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()
+apply(piosphere$veg ,MARGIN = 1,FUN=function(x){round(100*(sum(x!=0)/ncol(piosphere$veg)),2)}) %>% head(10) %>%  kable(colnames="Porcentaje",caption = paste0(tab.1_cap,"Porcentaje de Especies con datos en cada piosfera")) %>% kable_styling()%>%  add_footnote("Se muestran sólo diez primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
+```{r echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+apply(piosphere$veg ,MARGIN = 1,FUN=function(x){sum(x!=0)}) %>% head() %>% kable(colnames="Número",caption = paste0(tab.1_cap,"Número de Especies con datos en cada piosfera"))  %>% kable_styling()%>%  add_footnote("Se muestran sólo seis primeras filas", notation="alphabet")
+ind.tabla <- increment(ind.tabla,1)
+```
 
 - Mostrar la especie mayoritaria en cada una de las especies
 
@@ -161,7 +166,7 @@ ind.tabla <- increment(ind.tabla,1)
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 especie<-colnames(piosphere$veg)[apply(piosphere$veg,1,which.max)]
 porcentaje<-apply(piosphere$veg,1,max)
-data.frame(`Especie Mayoritaria`=especie,Porcentaje=porcentaje) %>% head(10) %>%  kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especie mayoritaria en cada piosfera")) %>% kable_styling()
+data.frame(`Especie Mayoritaria`=especie,Porcentaje=porcentaje) %>% head(10) %>%  kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especie mayoritaria en cada piosfera")) %>% kable_styling()%>%  add_footnote("Se muestran sólo diez primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -172,7 +177,7 @@ tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 caracteristicas.numericas<-sapply(piosphere$traits,class)
 caracteristicas.numericas<-names(caracteristicas.numericas)[caracteristicas.numericas=="numeric"]
 especie<-rownames(piosphere$traits)[apply(piosphere$traits[,caracteristicas.numericas],2,which.max)]
-data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% head(10) %>%   kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especies con mayores caracteristicas")) %>% kable_styling()
+data.frame(`Caracteristica`=caracteristicas.numericas,Especie=especie) %>% head(10) %>%   kable(colnames=c("Especie Mayoritaria", "Porcentaje"),caption = paste0(tab.1_cap,"Especies con mayores caracteristicas")) %>% kable_styling()%>%  add_footnote("Se muestran sólo diez primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -181,16 +186,16 @@ ind.tabla <- increment(ind.tabla,1)
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
-piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% dplyr::filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% head(10) %>%   kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling()
+piosphere$traits %>% dplyr::mutate(especie=rownames(.)) %>%  dplyr::filter(life.cycle=="annual") %>% dplyr::filter(leaf.consistency=="soft-mesomorphic") %>% dplyr::select(especie) %>% head(10) %>%   kable(colnames=c("Especie"),caption = paste0(tab.1_cap,"Especies ciclo vital anual y con consistencia de hoja mesomórfica suave")) %>% kable_styling() %>%  add_footnote("Se muestran sólo diez primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
-- Mostrar que piosferas tienen mayor inclinacion de la media
+- Mostrar que piosferas tienen mayor inclinación de la media
 
 ```{r echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 media.inclinacion<-mean(piosphere$env$Inclination,na.rm=T)
-piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(Inclination>media.inclinacion) %>% dplyr::select(piosfera,Inclination) %>% head(10) %>%  kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling()
+piosphere$env %>% dplyr::mutate(piosfera=rownames(.)) %>%  dplyr::filter(Inclination>media.inclinacion) %>% dplyr::select(piosfera,Inclination) %>% head(10) %>%  kable(colnames=c("Piosfera","Inclination"),caption = paste0(tab.1_cap,"Piosferas con mayor inclinación que la media")) %>% kable_styling() %>%  add_footnote("Se muestran sólo diez primeras filas", notation="alphabet")
 ind.tabla <- increment(ind.tabla,1)
 ```
 
@@ -280,7 +285,7 @@ pander(test)
 
 El p-valor es inferior al nivel de significación estándar 0.05 para las tres variables por lo que rechazamos H0 en todos los casos. Tenemos suficiente evidencia estadística para afirmar que estas variables no se ajustan a una distribución normal. Elaboramos un descriptivo y una representación gráfica para las variables.
 
-```{r, echo=}
+```{r, echo=F}
 tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 traits %>% dplyr::select(height,SLA,diaspore.length) %>% psych::describe() %>% kableExtra::kable(caption = paste0(tab.1_cap,"Descripción de variable height,SLA y Diaspore Length")) %>% kableExtra::kable_styling()
 ind.tabla <- increment(ind.tabla,1)
@@ -453,7 +458,7 @@ grid.arrange(n1, n2, n3, n4, ncol=2, nrow=2,
 
 Vamos a *suponer* que el logaritmo de la distancia al punto de agua siguiera una distribución normal de media `r round(median(piosphere$env$logDist),2)` y desviación típica `r round(sd(piosphere$env$logDist),2)`
 
-Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia inferior a 4 metros.
+- **Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia inferior a 4 metros.**
 
 ```{r}
 cuestion.1<-pnorm(q = 4,mean = mean(piosphere$env$logDist),sd = sd(piosphere$env$logDist))
@@ -461,7 +466,7 @@ cuestion.1<-pnorm(q = 4,mean = mean(piosphere$env$logDist),sd = sd(piosphere$env
 La probabilidad de que un punto de agua este a una distancia inferior a 4 metros es de `r cuestion.1`
 
 
-Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia superior a 8 metros.
+- **Calcularemos la probabilidad de que un punto de agua (en logaritmo) este a una distancia superior a 8 metros.**
 
 ```{r}
 cuestion.2<-1-pnorm(q = 8,mean = mean(piosphere$env$logDist),sd = sd(piosphere$env$logDist))
@@ -469,13 +474,14 @@ cuestion.2<-1-pnorm(q = 8,mean = mean(piosphere$env$logDist),sd = sd(piosphere$e
 La probabilidad de que un punto de agua este a una distancia superior de 8 metros es de `r cuestion.2`
 
 
-Vamos a tener que hacer un análisis de las diferentes especies que tenemos, suponemos que el análisis de una caracteristica como la posición de la flor (variable position.flower) no es fácil de medir y queremos ver cual de las otras caractéristicas(continuas) de las flores nos sirven para predecir con buena probabilidad la posición de la flor.
+- **Vamos a tener que hacer un análisis de las diferentes especies que tenemos, suponemos que el análisis de una caracteristica como la posición de la flor (variable position.flower) no es fácil de medir y queremos ver cual de las otras caractéristicas(continuas) de las flores nos sirven para predecir con buena probabilidad la posición de la flor.**
 
 Utilizando la técnica de curvas ROC primero buscaremos cual es la característica que nos da un AUC mayor 
 <!-- control = exposed, case = not exposed -->
 
 
 ```{r message=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 piosphere$traits %>% select(leaf.ratio,flower.position)
 tipos.de.variables<-sapply(piosphere$traits,class)
 variables.estudio<-colnames(piosphere$traits)[tipos.de.variables=="numeric"]
@@ -485,8 +491,8 @@ roc_obj <- pROC::roc(piosphere$traits$flower.position, piosphere$traits[,variabl
 names(lista.de.curvas.roc)<-variables.estudio
 lista.auc<-sapply(lista.de.curvas.roc,FUN=function(curva.roc){curva.roc$auc})
 names(lista.auc)<-variables.estudio
-data.frame(lista.auc) %>% kable(col.names = "AUC") %>% kable_styling()
-
+data.frame(lista.auc) %>% kable(col.names = "AUC",caption=paste0(tab.1_cap,"AUC de las variables predictoras")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 Observamos que la carácteristica con mayor AUC es el ratio de la hoja.
@@ -499,10 +505,11 @@ Con una probabilidad del 75,86% la posición floral en nuestra muestra es expues
 
 
 ```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 cp <- cutpointr(data = piosphere$traits,class = flower.position , x = leaf.ratio, 
                 method = maximize_metric, metric = sum_sens_spec)
-
-cp %>% kable() %>% kable_styling()
+cp %>% kable(caption=paste0(tab.1_cap,"Estadisticos relativos a la curva ROC")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 
@@ -524,13 +531,17 @@ all(tabla_muestras==c(8,16,8,8))
 Las muestras elegidas son 
 
 ```{r}
-muestras_elegidas %>% kable %>% kable_styling()
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+muestras_elegidas %>% kable(caption=paste0(tab.1_cap,"Muestras seleccionadas")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 
 **6. (1 punto) Realizad un breve análisis de regresión (lineal y múltiple) a partir de las variables que disponéis y utilizando el criterio que responda a alguna pregunta de interés que os hayáis planteado.**
 
 #Planteamos
+
+Queremos analizar la relación del número de especies según las caracteristicas medioambientales de las piosferas
 
 Calcular número de especies por piosfera
 
@@ -542,9 +553,18 @@ shapiro.test(df.modelo.lineal$num.especies)
 ```
 
 
-```{r echo=F}
-
+```{r fig.cap="Histograma del Número de Especies"}
+plot.num.especies <- ggplot(data=df.modelo.lineal, aes(x=num.especies)) + 
+  geom_histogram(col="black", 
+                 fill="darkorange", 
+                 alpha = .6) + 
+  labs(title="Número de especies", x="Número de Especies", y="Frecuencia")
+  
+plot.num.especies
 ```
+
+
+Como hemos visto rechazamos la hipotesis de normalidad (p valor inferior  a 0,05 en el test de Shapiro-Wilk), esto junto a que se trata una variable de conteos, vamos a considerar utilizar modelos lineales generalizados basados en la distribución de Poisson.
 
 
 ```{r}
@@ -576,11 +596,13 @@ df.modelo.lineal %>%
     ## Add multivariable
     ff_merge(fit_multi, estimate_name = "Rate ratio") %>% 
     dependent_label(df.modelo.lineal, dependent) -> t
-t %>% kable() %>% kable_styling()
+
+t %>% kable(caption=paste0(tab.1_cap,"Muestras Modelo de regresión univariante y multivariante")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 
-```{r}
+```{r eval=F}
 DAW2 <- env[grep("^DAW2",rownames(env)),]
 DAW2 <- DAW2 %>% summarise_if(is.numeric, mean)
 
@@ -625,27 +647,21 @@ Graficamos la distribución de las intensidades de los pastoreos según el tipo 
 df<-data.frame(GrazInt=piosphere$env$GrazInt,habitat=piosphere$habitat)
 ```
 
-```{r}
+```{r, eval=T, echo=F, fig.cap="Boxplot de la variable Intensidad de los pastoreos por tipo de habitat"}
 p <- ggplot(df, aes(x=habitat, y=GrazInt,fill=habitat)) + 
   geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
 p
 ```
 
-Observamos que las intensidad en los bebederos de las piosferas que tienen habitat stone poseen una variabilidad mucho mayor que los otros tres habitats, ademas podemos ver como la mediana y la media difieren entre sí. Vemos en la siguiente tabla los valores de los descriptivos basicos media, mediana y desviación típica
+En la siguiente tabla cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad (p valor < 0,05).
 
-
-```{r}
-df %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
-```
-
-Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
-
-```{r}
+```{r eval=T,echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 res.test.normalidad<-df %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
-res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
-
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad",caption=paste0(tab.1_cap,"Análisis de normalidad por habitat")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 Al aplicar el test de homogeneidad de varianzas vemos que el p-valor obtenido en el test es inferior a 0,05 lo cual nos indica que no sigue las hipotesis necesarias para hacer el análisis de la varianza.
@@ -655,7 +671,7 @@ test.homog.varianzas<-fligner.test(df$GrazInt~df$habitat,df)
 test.homog.varianzas$p.value
 ```
 
-```{r  eval=F}
+```{r  eval=F,echo=F}
 anova_df<-aov(GrazInt~habitat,data=df)
 summary(anova_df)
 plot(anova_df)
@@ -671,7 +687,7 @@ En este punto podemos utilizar tres estrategías:
 
 - Aplicar test no paramétricos (Prueba de Kruskal-Wallis)
 
-Para utilizar la primera estrategía voy a probar
+Para utilizar la primera estrategía probamos a
 
 - Transformar con logaritmos
 
@@ -682,20 +698,26 @@ Para utilizar la primera estrategía voy a probar
 
 Tomando logaritmos:
 
-```{r}
+```{r eval=T, fig.cap="Boxplot de la variable Intensidad de los pastoreos por tipo de habitat (logaritmos)"}
 p <- df %>% mutate(log.Graz.Int=log(GrazInt)) %>% ggplot(aes(x=habitat, y=log.Graz.Int,fill=habitat)) + 
   geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
 p
 ```
 
-Analizamos la normalidad de la variable transformada
+Hemos observado que no hemos conseguido ni homogeneizar varianzas, incluso la variabilidad en el tipo de habitat stone ha aumentado, de todas formas comprobaremos la normalidad de la variable transformada a través de los correspondientes test estadísticos.
 
-```{r}
+```{r eval=T}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 res.test.normalidad<-df %>% mutate(log.Graz.Int=log(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$log.Graz.Int)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
-res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad",caption=paste0(tab.1_cap,"Análisis de normalidad por tipo de habitat")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
+
+En la tabla anterior podemos observar que al transformar en logaritmos hemos conseguido normalidad en las piosferas de habitat calcareo y de arena de 2008, pero no así en habitat piedra y arena de 2007.
+
+Observamos con el correspondiente test como no tenemos homogeneidad de varianzas, condición para aplicar la prueba ANOVA
 
 ```{r}
 df.log<-df %>% mutate(log.Graz.Int=log(GrazInt))
@@ -706,19 +728,26 @@ test.homog.varianzas$p.value
 
 Analizamos la normalidad de la variable transformada con raices cuadradas
 
-```{r}
+```{r eval=T,  fig.cap="Boxplot de la variable Intensidad de los pastoreos por tipo de habitat (raiz cuadrada)"}
 p <- df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% ggplot(aes(x=habitat, y=sqrt.Graz.Int,fill=habitat)) + 
   geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
 p
 ```
 
 
-```{r}
+
+```{r eval=T}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 res.test.normalidad<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt)) %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$sqrt.Graz.Int)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df$habitat)
-res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad",caption=paste0(tab.1_cap,"Análisis de normalidad por habitat")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
+
+En la tabla anterior podemos observar que al transformar con raices cuadradas hemos conseguido normalidad unicamente en piosferas cuyo habitat arena de 2008, pero no así en habitat calcareo, piedra y arena de 2007.
+
+Observamos con el correspondiente test como no tenemos homogeneidad de varianzas, condición para aplicar la prueba ANOVA
 
 ```{r}
 df.sqrt<-df %>% mutate(sqrt.Graz.Int=sqrt(GrazInt))
@@ -730,11 +759,11 @@ test.homog.varianzas$p.value
 Analizamos la normalidad de la variable transformada con la transformación de Box-Cox
 
 
-```{r}
+```{r eval=T}
 library(MASS)
 Box <- boxcox(piosphere$env$GrazInt ~ 1,              # Transform Turbidity as a single vector
              lambda = seq(-6,6,0.1)      # Try values -6 to 6 by 0.1
-             )
+             ,plotit = F)
 Cox = data.frame(Box$x, Box$y)   
 Cox2 = Cox[with(Cox, order(-Cox$Box.y)),] 
 lambda = Cox2[1, "Box.x"]      
@@ -742,18 +771,26 @@ T_box = (piosphere$env$GrazInt ^ lambda - 1)/lambda
 ```
 
 
-```{r}
+```{r eval=T,echo=F}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 df.boxcox<-data.frame(GrazInt_T_box=T_box,habitat=piosphere$habitat)
-res.test.normalidad<-df.boxcox %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt_T_box)) 
-res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
-names(res.p.valor.normalidad)<-levels(df$habitat)
-res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
 ```
 
 
+```{r eval=T,echo=F}
+res.test.normalidad<-df.boxcox %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt_T_box)) 
+res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
+names(res.p.valor.normalidad)<-levels(df$habitat)
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad",caption=paste0(tab.1_cap,"Análisis de normalidad por habitat")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
+```
+
+En la tabla anterior podemos observar que al utilizar la familia de transformaciones de BoxCox hemos conseguido normalidad en las piosferas de habitat calcareo y de arena de 2008, pero no así en habitat piedra y arena de 2007.
+
+Observamos con el correspondiente test como no tenemos homogeneidad de varianzas, condición para aplicar la prueba ANOVA
 
 ```{r}
-test.homog.varianzas<-fligner.test(df.boxcox$GrazInt_T_box~df.boxcox$habitat,df.boxcox)
+test.homog.varianzas<-fligner.test(df.boxcox$GrazInt_T_box,df.boxcox$habitat,df.boxcox)
 test.homog.varianzas$p.value
 ```
 
@@ -768,24 +805,29 @@ df.sin.atipicos<-df[outlier_index,]
 ```
 
 
-```{r}
+```{r eval=T, fig.cap="Boxplot de la variable Intensidad de los pastoreos por tipo de habitat (Sin outliers)"}
 p <- ggplot(df.sin.atipicos, aes(x=habitat, y=GrazInt,fill=habitat)) + 
   geom_boxplot()+scale_fill_manual(values=c("yellow2","white","red4","green4"))+stat_summary(fun.y=mean, geom="point",  size=1)+theme_minimal()
 p
 ```
 
+En el gráfico anterior observamos que hemos reducido la variabilidad en el habitat piedra, pero seguimos viendo la existencia de valores extremos en los cuatro habitats. Mostramos en la siguiente tabla los descriptivos principales para la variable intensidad del pastoreo.
+
 ```{r}
-df.sin.atipicos %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption="Media, Mediana y Desviación Típica por habitat") %>% kableExtra::kable_styling()
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
+df.sin.atipicos %>% dplyr::group_by(habitat) %>% summarize(media=round(mean(GrazInt,na.rm=T),4),mediana=median(GrazInt,na.rm=T),sd=round(sd(GrazInt,na.rm=T),4)) %>% kableExtra::kable(caption=paste0(tab.1_cap,"Media, Mediana y Desviación Típica por habitat")) %>% kableExtra::kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 Cuando analizamos la normalidad por tipo de habitat de la variable en estudio observamos que podemos rechazar la hipótesis de normalidad.
 
 ```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 res.test.normalidad<-df.sin.atipicos %>% dplyr::group_by(habitat) %>%  dplyr::group_map(.f = ~shapiro.test(.x$GrazInt)) 
 res.p.valor.normalidad<-sapply(res.test.normalidad,FUN=function(p.valor.normalidad.habitat){p.valor.normalidad.habitat$p.value})
 names(res.p.valor.normalidad)<-levels(df.sin.atipicos$habitat)
-res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad") %>% kable_styling()
-
+res.p.valor.normalidad %>% kableExtra::kable(col.names = "p valor normalidad",caption=paste0(tab.1_cap,"Análisis de normalidad por habitat")) %>% kable_styling()
+ind.tabla<-increment(ind.tabla,1)
 ```
 
 Al aplicar el test de homogeneidad de varianzas vemos que el p-valor obtenido en el test es inferior a 0,05 lo cual nos indica que no sigue las hipotesis necesarias para hacer el análisis de la varianza.
@@ -796,20 +838,24 @@ test.homog.varianzas$p.value
 ```
 
 
-Aplicar test no paramétricos:
+Como alternativa a lo hecho anteriormente aplicaremos test no paramétricos, en este caso utilizaremos el test de Kruskal-Wallis, y para las comparaciones entre parejas se utilizará el test de la U de Mann-Withney que es la alternativa no parámetrica al test de la t de Student. Para hacer esto utilizo la función compareGroups de la libreria del mismo nombre que me muestra la tabla con el p valor asociado al test de Kruskal-Wallis así como las comparaciones entre grupos.
 
 
 ```{r}
+tab.1_cap<-table_nums(name=paste0("tab",ind.tabla))
 kruskal.test(df$GrazInt~df$habitat)
-compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T,digits=5) %>% compareGroups::export2md()
+compareGroups::compareGroups(formula=habitat~GrazInt,method = 4,data=df) %>% compareGroups::createTable(show.p.mul = T,digits=5) %>% compareGroups::export2md(caption = paste0(tab.1_cap,"Análisis no paramétrico de la intensidad de pastoreos según el tipo de habitat"))
+ind.tabla<-increment(ind.tabla,1)
 ```
+
+En la tabla anterior podemos ver, además de la mediana y el recorrido intercuartilico de la variable intensidad de los pastoreos en cada habitat, el p valor asociado al test de Kruskal-Wallis es inferior a 0.001, lo cual nos indica que podemos rechazar la hipótesis de igualdad de distribuciones según el tipo de habitat.  Ademas vemos que todos los grupos son diferentes entre si al comparar los habitats dos a dos. 
+
 
 
 
 
 
 **8. (1 punto) A partir de los datos de origen y el estudio realizado, haced una valoración final. Para ello, podéis basaros en las siguientes preguntas: "disponemos de conclusiones finales?", "sería necesario hacer un análisis más avanzado?", "faltan datos para obtener otro tipo de información como...?",.... **
-
 
 
 
@@ -822,6 +868,15 @@ Podéis basaros en la información referenciada de la plataforma Datacamp, a la 
 Sería conveniente, que el ejemplo a desarrollar sea basado en la fuente de datos de la Sección 1, pero también podéis basaros en otro conjunto de datos.
 
 Los temas a escoger son:
-- Construcción de una aplicación web con Shiny 
+- **Construcción de una aplicación web con Shiny **
 - Análisis cluster con R 
 - Repositorio Bioconductor en R 
+
+
+El tema que hemos elegido es el de realizar una pequeña aplicación web  con shiny para 
+
+- Mostrar las tablas de descriptivos
+
+- Graficos de las variables categoricas
+
+pudiendo filtrar que variables queremos mostrar.
